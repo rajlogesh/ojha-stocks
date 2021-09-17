@@ -1,0 +1,181 @@
+.interdatadetail-toolbar {
+  display: flex;
+  button {
+    margin: 8px;
+  }
+}
+
+.interdatadetail-search-section,
+.interdata-detail {
+  margin: 20px;
+}
+
+.interdatadetail-title {
+  margin-top: 15px;
+  margin-right: 20px;
+  text-shadow: 0px 2px 3px #eee;
+}
+
+.search-container {
+    padding-left: 10px;
+    // width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+.interdata-detail {
+  table {
+    margin-bottom: 20px;
+  }
+}
+
+.mat-spinner {
+  margin: 0 auto;
+}
+
+:host ::ng-deep td:hover {
+  background-color: rgb(236, 207, 255);
+  cursor: pointer;
+}
+
+:host ::ng-deep .interdatadetail-toolbar .mat-form-field-wrapper {
+  padding: 0px;
+}
+
+.backBtn {
+  margin: 10px 10px auto 10px;
+}
+
+.RPP {
+  width: 60px;
+}
+
+.pagination {
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 45px;
+  width: 100%;
+}
+
+.idcell:hover {
+  background-image: url('/assets/search.png');
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  // display: flex;
+
+}
+
+.example-element-detail .mat-figure{
+  justify-content: left !important;
+}
+
+.description-header{
+  width:50%;
+  overflow-wrap: anywhere ;
+  // display: flex;
+  // padding: 10px;
+}
+
+.description-details{
+  width: 50%;
+  overflow-wrap: anywhere ;
+
+}
+
+.clearfix {
+  overflow: auto;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+
+
+.example-element-description-attribution {
+  display: block;
+  margin-bottom: 0;
+  opacity: 0.5;
+}
+
+.btn-update {
+  margin-bottom: 20px;
+  float: right;
+}
+.mat-card .mat-divider-horizontal{
+  position: static;
+}
+
+.table-wrapper{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  overflow-x: auto;
+  .mat-table{
+    min-width: 960px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+
+  .interdatadetail-toolbar {
+      flex-direction: column;
+      .table-nav{
+        flex-direction: row;
+        // flex-wrap: wrap;
+      }
+      .opt{
+        flex-direction: row;
+      }
+  }
+}
+
+@media screen and (max-width: 458px) {
+
+  .interdatadetail-toolbar {
+      flex-direction: column;
+      .table-nav{
+        flex-direction: row;
+        flex-wrap: wrap;
+        .search-container{
+          width: 100%;
+        }
+      }
+      .opt{
+        flex-direction: row;
+      }
+  }
+}

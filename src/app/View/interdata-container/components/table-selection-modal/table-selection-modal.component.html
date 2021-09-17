@@ -1,0 +1,10 @@
+<h2 mat-dialog-title >Search <span class="searchKey">{{key}}</span> in</h2>
+<div mat-dialog-content >
+  <mat-list role="list" >
+    <mat-list-item role="listitem" *ngFor="let item of tableList" class="listitem" (click)="search(item.viewName)" >{{ item.viewName }}</mat-list-item>
+  </mat-list>
+</div>
+<div mat-dialog-actions class="flex actionArea" >
+  <span class="spacer"></span>
+  <button mat-raised-button color="primary" (click)="close();" >Cancel</button>
+</div>

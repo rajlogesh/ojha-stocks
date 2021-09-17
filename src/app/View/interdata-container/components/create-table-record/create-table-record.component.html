@@ -1,0 +1,72 @@
+
+
+<mat-card class="interdata-search-section">
+  <div class="interdata-toolbar flex">
+    <h3 class="interdata-title">Create New Record</h3>
+    <span class="spacer"></span>
+    <a mat-button (click)="location.back()"><mat-icon>arrow_back_ios</mat-icon> Back</a>
+  </div>
+</mat-card>
+<mat-card *ngIf="userFeedback!=='none'">
+  <section *ngIf="userFeedback=='loading'" class="text-center">
+    <mat-spinner [diameter]="25" [strokeWidth]="2"></mat-spinner>
+  </section>
+  <section *ngIf="userFeedback=='success'" class="text-center">
+    Successfully created the record.
+  </section>
+  <section *ngIf="userFeedback=='failure'" class="text-center">
+    Failed to create the record. Please try again or check the errors.
+  </section>
+</mat-card>
+<mat-card class="create-interdata-table" *ngIf="userFeedback=='none'">
+  <form [formGroup]="createTableRecordForm" (ngSubmit)="createTableRecord()">
+    <mat-card-content>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>{{partitionKeyName}}</mat-label>
+          <input matInput name="partitionKeyName" placeholder={{partitionKeyName}} type="text"
+            formControlName="partitionKey" />
+          <mat-error>Partition key  is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>{{rowKeyName}}</mat-label>
+          <input matInput name="rowKeyName" placeholder={{rowKeyName}} type="text" formControlName="rowKey" />
+          <mat-error>Row key is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="flex">
+        <strong>Properties</strong>
+        <span class="spacer"></span>
+        <span><a mat-flat-button color="primary"  (click)="addProperties()">Add item</a></span>
+      </div>
+
+      <div formArrayName="properties" >
+        <div *ngFor="let properties of getProperties.controls; let i = index" [formGroupName]="i">
+          <mat-form-field appearance="outline">
+            <mat-label>Property Name</mat-label>
+            <input matInput placeholder="Key" type="text" formControlName="propKey" />
+            <mat-error>Key is required</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Property Value</mat-label>
+            <input matInput placeholder="Value" type="text" formControlName="propValue" />
+            <mat-error>Value is required</mat-error>
+          </mat-form-field>
+          <button mat-icon-button matTooltip="Remove item" (click)="removeProperty(i)">
+            <mat-icon>remove_circle</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <mat-checkbox color="primary" (change)="onReplace($event)"> Replace if already exists </mat-checkbox>
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-actions class="text-center">
+      <button mat-raised-button color="primary" class="butn" [disabled]="createTableRecordForm.invalid">Create</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

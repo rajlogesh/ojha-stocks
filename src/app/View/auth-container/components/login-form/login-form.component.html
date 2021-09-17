@@ -1,0 +1,17 @@
+<form [formGroup]="signin_form" (ngSubmit)="normalSignIn()" >
+  <mat-form-field appearance="outline" >
+    <mat-label>Username</mat-label>
+    <input matInput type="text" placeholder="UserID" name="login-email" formControlName="user" />
+    <mat-error *ngIf="signInFormControls.user.errors?.required" >User ID is required</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input matInput type="password" placeholder="Password" name="login-password" formControlName="password" />
+    <mat-error *ngIf="signInFormControls.password.errors?.required">Password is required</mat-error>
+    <mat-error *ngIf="signInFormControls.password.errors?.minlength">Password must have atleast 8 characters.</mat-error>
+  </mat-form-field>
+  <button type="submit" mat-raised-button color="primary" [disabled]="!signin_form.valid" >Login</button>
+  <mat-error class="form-feedback" *ngIf="loginError" >
+    User Id or Password incorrect. Please check your credentials.
+  </mat-error>
+</form>

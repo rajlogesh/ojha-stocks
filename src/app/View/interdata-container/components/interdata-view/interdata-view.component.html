@@ -1,0 +1,95 @@
+<mat-card *ngIf="loading===true" >
+  <section class="text-center" >
+      <mat-spinner [diameter]="50" [strokeWidth]="2" ></mat-spinner>
+  </section>
+</mat-card>
+
+<ng-container *ngIf="loading===false" >
+  <mat-card class="interdata-search-section">
+      <div class="interdata-toolbar flex">
+          <h3 class="interdata-title">Interdata View</h3>
+          <mat-form-field class="search-container" appearance="outline">
+              <mat-label>Search</mat-label>
+              <input matInput placeholder="Search" (keyup)="filterResults($event)" name="InterdataSearch" value={{searchValue}} />
+          </mat-form-field>
+          <span class="spacer"></span>
+          <div class="actions flex ">
+              <button mat-raised-button color="primary" class="" (click)="createNew()" >Create New</button>
+          </div>
+          <div class="pager flex">
+            <button mat-button color="primary" [disabled]="!ppAvailable" (click)="prevDS();">
+              <mat-icon>first_page</mat-icon>
+              Prev {{pageLength}}
+            </button>
+            <button mat-button color="primary" [disabled]="!npAvailable" (click)="nextDS();">
+              Next {{pageLength}}
+              <mat-icon>last_page</mat-icon>
+            </button>
+          </div>
+      </div>
+  </mat-card>
+</ng-container>
+<section class="interdata-content" [hidden]="!(loading===false)" >
+  <div class="table-wrapper">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z0">
+
+        <!-- viewName Column -->
+        <ng-container matColumnDef="viewName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> View Name </th>
+            <td mat-cell *matCellDef="let element" (click)="displayViewDetails(element)"> {{element.viewName}} </td>
+        </ng-container>
+
+        <!-- Description Column -->
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+            <td mat-cell *matCellDef="let element" (click)="displayViewDetails(element)"> {{element.description}} </td>
+        </ng-container>
+
+        <!-- Createddate Column -->
+        <ng-container matColumnDef="createdTime">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Created Time </th>
+            <td mat-cell *matCellDef="let element"  (click)="displayViewDetails(element)"> {{element.createdTime | date:'medium' }} </td>
+        </ng-container>
+        <ng-container matColumnDef="fieldsdetailActions">
+          <th mat-header-cell *matHeaderCellDef >Fields Detail</th>
+          <td mat-cell *matCellDef="let element" >
+            <button mat-icon-button matTooltip="Fields Detail"
+            (click)="displayViewDetails(element)" aria-label="Fields Detail" >
+              <mat-icon>description</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="editActions">
+          <th mat-header-cell *matHeaderCellDef >Edit</th>
+          <td mat-cell *matCellDef="let element" >
+            <button mat-icon-button matTooltip="Edit View"
+            [routerLink]="['/interdata', 'view', element.id]" aria-label="View" >
+              <mat-icon>edit</mat-icon>
+              <!-- *ngIf="(element.id != userID && (element.id != '' && (element.inviteeId == null || element.inviteeId == undefined))) "
+            (click)="openDeleteMembersModal($event, element.id)" -->
+            </button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef >Remove</th>
+          <td mat-cell *matCellDef="let element" >
+            <button mat-icon-button matTooltip="Remove View"
+             *ngIf="(element.id != userID && (element.id != '' && (element.inviteeId == null || element.inviteeId == undefined))) "
+            (click)="openDeleteMembersModal($event, element.id)" aria-label="Remove" >
+              <mat-icon>remove_circle</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator class="mat-elevation-z1"
+        [length]="pageLength"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="onPaginateChange($event)"
+        showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</section>
+

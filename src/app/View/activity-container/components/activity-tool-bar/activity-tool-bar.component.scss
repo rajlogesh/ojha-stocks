@@ -1,0 +1,103 @@
+@media (min-width: 769px) {
+  .activity-toolbar {
+    display: flex;
+  }
+  .at-title {
+    margin-top: 15px;
+    margin-right: 20px;
+    text-shadow: 0px 2px 3px #eee;
+  }
+  .at-df,
+  .at-ds {
+    margin-right: 10px;
+  }
+  .at-rf {
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .at-df,
+  .at-ds {
+    width: 100% !important;
+  }
+  .activity-toolbar {
+    display: flex;
+    flex-direction: column;
+  }
+  .spacer {
+    flex: 0 0 auto !important;
+  }
+  .at-title {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  .btn{
+    flex-direction: row;
+    .at-rf{
+      margin-top: 10px;
+      width: auto;
+    }
+    button{
+      width: 50%;
+    }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .at-df,
+  .at-ds {
+    width: 100% !important;
+  }
+  .activity-toolbar {
+    display: flex;
+    flex-direction: column;
+  }
+  .spacer {
+    flex: 0 0 auto !important;
+  }
+  .at-title {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  .btn{
+    flex-direction: row;
+    .at-rf{
+      margin-top: 10px;
+      width: auto;
+    }
+    button{
+      width: 50%;
+    }
+  }
+}
+
+.mat-spinner {
+  margin: 0 auto;
+}
+
+.activity-toolbar {
+  padding-left: 10px;
+}
+
+.activity-filter-section {
+  margin-bottom: 20px;
+}
+
+.spinner-loader {
+  margin: 0 auto;
+}
+
+:host ::ng-deep .activity-toolbar .mat-form-field-wrapper {
+  padding-bottom: 0em;
+}
+
+.mat-form-field{
+  margin-right: 10px;
+}
+
+.nextPageBtn {
+  height: 40px;
+  margin-top: 10px;
+}
+

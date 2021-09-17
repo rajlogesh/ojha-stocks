@@ -1,0 +1,51 @@
+.mat-spinner {
+  margin: 20px auto;
+}
+.edges-container {
+  margin: 20px;
+  .mat-form-field {
+    width: 100%;
+  }
+  .edges-table {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    overflow-x: auto;
+    table {
+      width: 100%;
+      min-width: 800px;
+      .mat-row {
+        cursor: pointer;
+      }
+      .mat-row:hover {
+        background-color: rgb(236, 207, 255);
+      }
+    }
+    .mat-paginator{
+      min-width: 800px;
+    }
+  }
+}
+.navigation {
+  button {
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+}
+
+
+@media screen and (max-width: 567px) {
+
+  .navigation {
+      flex-direction: column;
+      .actions{
+        flex-direction: column;
+      }
+      .pager{
+        button{
+          width: 50%;
+        }
+      }
+  }
+
+}

@@ -1,0 +1,49 @@
+@media (min-width: 768px) {
+  .logo-section {
+    width: 60%;
+    margin: 30px auto;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .logo-section {
+    width: 80%;
+    margin: 30px auto;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .logo-section {
+    width: 95%;
+    margin: 20px auto;
+  }
+}
+
+.logo-form {
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.current-logo,
+.image-preview {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #673ab7;
+  overflow: hidden;
+}
+
+.mat-spinner {
+  margin: 0 auto;
+}
+
+.new-logo-title,
+.current-logo-title {
+  text-align: left;
+}
+
+.logo-upload-button {
+  margin-left: 10px;
+}

@@ -1,0 +1,16 @@
+.mat-card {
+  margin: 20px;
+  line-height: 35px;
+}
+
+:host ::ng-deep h3 {
+  margin: 0px !important;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.butn {
+  padding: 0px 30px 0px 30px;
+}

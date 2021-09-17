@@ -1,0 +1,76 @@
+.interdatadetail-toolbar {
+  display: flex;
+}
+
+.interdatadetail-search-section,
+.interdata-detail {
+  margin: 20px;
+}
+
+.interdatadetail-title {
+  margin-top: 15px;
+  margin-right: 20px;
+  text-shadow: 0px 2px 3px #eee;
+}
+
+.search-container {
+    padding-left: 10px;
+}
+
+table {
+  width: 100%;
+}
+
+.interdata-detail {
+  table {
+    margin-bottom: 20px;
+  }
+}
+
+.mat-spinner {
+  margin: 0 auto;
+}
+
+.mat-row {
+  cursor: pointer;
+}
+.mat-row:hover {
+  background-color: cyan;
+}
+
+
+.backBtn {
+  margin: 10px 30px auto 10px;
+}
+
+
+
+.pagination {
+  margin-top: 10px;
+  margin-left: 10px;
+  height: 35px;
+}
+
+.add-new-record {
+  margin-top: 15px;
+  margin-right: 40px;
+  height: 40px;
+}
+
+
+.table-details-container {
+  margin: 20px;
+  .mat-card-content {
+    text-align: center;
+  }
+  .mat-card-actions {
+    text-align: center;
+  }
+  .mat-form-field {
+    width: 100%;
+  }
+  .pointer{
+    cursor:pointer;
+  }
+
+}

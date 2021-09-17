@@ -1,0 +1,41 @@
+<section class="logo-section" >
+  <mat-card class="logo-card" >
+    <mat-card-content>
+      <ng-container *ngIf="loading===true" >
+        <mat-spinner [diameter]="100" [strokeWidth]="3" ></mat-spinner>
+      </ng-container>
+      <ng-container *ngIf="loading===false" >
+        <ng-container *ngIf="logoUploadSuccessMsg" >
+          <h3>Logo updated successfully.</h3>
+        </ng-container>
+        <ng-container *ngIf="logoUploadErrorMsg" >
+          <h3>Logo failed to update.</h3>
+        </ng-container>
+        <ng-container *ngIf="!logoUploadSuccessMsg && !logoUploadErrorMsg" >
+          <form class="logo-form" >
+            <h3 *ngIf="logo$" class="current-logo-title" >Current logo </h3>
+            <div *ngIf="logo$" class="current-logo" >
+              <img [src]="logo$ | async" />
+            </div>
+            <h3 *ngIf="selectedFileSource" class="current-logo-title" >New logo </h3>
+            <div class="image-preview" *ngIf="selectedFileSource" >
+              <img class="image-preview" src="{{selectedFileSource}}" />
+            </div>
+            <input #uploader type="file" class="hidden" 
+              name="logoUpload"   
+              (change)="onLogoChosen($event)" 
+              accept="image/png, image/jpg, image/jpeg" />
+            <button (click)="uploader.click();" mat-raised-button 
+              color="primary" 
+              class="logo-choose-button" >Choose Logo</button>
+            <ng-container *ngIf="selectedFile" >
+            <button (click)="uploadLogo()" mat-raised-button
+              color="primary"
+              class="logo-upload-button" >Upload Logo</button>
+            </ng-container>
+          </form>
+        </ng-container>
+      </ng-container>
+    </mat-card-content>
+  </mat-card>
+</section>

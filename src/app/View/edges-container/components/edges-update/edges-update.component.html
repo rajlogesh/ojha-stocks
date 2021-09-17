@@ -1,0 +1,73 @@
+<mat-card class="edge-nav" *ngIf="loading===true" >
+  <div class="flex">
+    <span class="spacer"></span>
+    <mat-spinner [diameter]="50" [strokeWidth]="2" ></mat-spinner>
+    <span class="spacer"></span>
+  </div>
+</mat-card>
+<mat-card class="edge-nav" *ngIf="loading!==true" >
+  <div class="flex">
+    <h3 class="edge-title" >Edge Detail</h3>
+    <span class="spacer"></span>
+    <button mat-button (click)="backToEdge()" >
+      <mat-icon>chevron_left</mat-icon>
+      Back to Edges
+    </button>
+    <button mat-button (click)="confirmDelete()" >
+      <mat-icon>delete</mat-icon>
+      Delete
+    </button>
+  </div>
+</mat-card>
+<ng-container *ngIf="userFeedback=='success'" >
+  <mat-card class="update-edge-container" >
+    Successfully updated the edge.
+  </mat-card>
+</ng-container>
+<ng-container *ngIf="userFeedback=='failure'" >
+  <mat-card class="update-edge-container" >
+    Sorry! Failed to update the edge.
+  </mat-card>
+</ng-container>
+<ng-container *ngIf="userFeedback=='delete'" >
+  <mat-card class="update-edge-container" >
+    Successfully deleted the edge.
+  </mat-card>
+</ng-container>
+<ng-container *ngIf="userFeedback=='deleteFailed'" >
+  <mat-card class="update-edge-container" >
+    Sorry! Failed to delete the edge.
+  </mat-card>
+</ng-container>
+<ng-container *ngIf="userFeedback=='fetchFailed'" >
+  <mat-card class="update-edge-container" >
+    Sorry! Failed to fetch the edge data.
+  </mat-card>
+</ng-container>
+<ng-container *ngIf="userFeedback=='none' && loading!==true" >
+  <form [formGroup]="update_edge_form" (ngSubmit)="updateEdges()" >
+    <mat-card class="update-edge-container" >
+      <mat-card-content>
+        <mat-form-field appearance="outline" >
+          <mat-label>Name</mat-label>
+          <input type="text" name="edgename" placeholder="Name" matInput formControlName="edgename" />
+          <mat-error *ngIf="edgeFormControls.edgename.errors?.required" >Name is required</mat-error>
+          <mat-error *ngIf="edgeFormControls.edgename.errors?.minlength" >Name should have more than 2 characters.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" >
+          <mat-label>Location</mat-label>
+          <input type="text" name="edgelocation" placeholder="Location" matInput formControlName="edgelocation" />
+          <mat-error *ngIf="edgeFormControls.edgelocation.errors?.required" >Location is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" >
+          <mat-label>Description</mat-label>
+          <input type="text" name="edgedescription" placeholder="Description" matInput formControlName="edgedescription" />
+          <mat-error *ngIf="edgeFormControls.edgedescription.errors?.required" >Description is required</mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" [disabled]="update_edge_form.invalid" >Update</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</ng-container>

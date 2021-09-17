@@ -1,0 +1,95 @@
+<mat-card class="interdatadetail-search-section" *ngIf="loading===false" >
+  <mat-grid-list [cols]="breakpoint" rowHeight="60px" (window:resize)="onResize($event)">
+    <div class="interdatadetail-toolbar">
+      <mat-grid-tile [colspan] = "breakpoint !== 2? '2':'1'">
+        <h3 class="interdatadetail-title">{{ viewName }} Details</h3>
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="breakpoint !== 2" colspan = "7"></mat-grid-tile>
+      <mat-grid-tile [colspan] = "breakpoint !== 2? '3':'2'">
+        <button mat-button (click)="location.back()" >
+            <mat-icon>chevron_left</mat-icon>
+            Back to Views
+        </button>
+        <button mat-button
+            (click)="deleteConfirmation($event)" >
+              <mat-icon>delete</mat-icon>
+              Delete View
+        </button>
+      </mat-grid-tile>
+  </div>
+  </mat-grid-list>
+</mat-card>
+<mat-card *ngIf="userFeedback!=='none'" >
+  <section *ngIf="userFeedback=='loading'" class="text-center" >
+      <mat-spinner [diameter]="25" [strokeWidth]="2" ></mat-spinner>
+  </section>
+  <section *ngIf="userFeedback=='success'" class="text-center" >
+      Successfully updated the interdata view.
+  </section>
+  <section *ngIf="userFeedback=='failure'" class="text-center" >
+      Failed to update the interdata view. Please try again or check the errors.
+  </section>
+</mat-card>
+<mat-card class="interdatadetail-search-section" *ngIf="loading===true" >
+  <mat-spinner [diameter]="50" [strokeWidth]="2" ></mat-spinner>
+</mat-card>
+<ng-container *ngIf="userFeedback=='none' && loading!==true" >
+  <form [formGroup]="view_details_form"  (ngSubmit)="updateViewDetails()">
+    <mat-card class="table-details-container" >
+      <mat-card-content>
+        <mat-form-field appearance="outline" >
+          <mat-label>View Name</mat-label>
+          <input type="text" name="viewName" placeholder="View Name" matInput formControlName="viewName" />
+          <mat-error *ngIf="viewDetailsFormControls.viewName.errors?.required" >Table Name is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" >
+          <mat-label>View Label</mat-label>
+          <input type="text" name="viewNameLabel" placeholder="View Label" matInput formControlName="viewNameLabel" />
+          <mat-error *ngIf="viewDetailsFormControls.viewNameLabel.errors?.required" >Table Label is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" >
+          <mat-label>Table Name</mat-label>
+          <input type="text" name="tableName" placeholder="Table Name" matInput formControlName="tableName" />
+          <mat-error *ngIf="viewDetailsFormControls.tableName.errors?.required" >Table Name is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" >
+          <mat-label>Description</mat-label>
+          <input type="text" name="description" placeholder="Description" matInput formControlName="description" />
+          <mat-error *ngIf="viewDetailsFormControls.description.errors?.required" >Table Name is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" >
+          <mat-label>Partition Key Name</mat-label>
+          <input type="text" name="partitionKeyName" placeholder="Partition Key Name" matInput formControlName="partitionKeyName" />
+          <mat-error *ngIf="viewDetailsFormControls.partitionKeyName.errors?.required" >Partition Key Name is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" >
+          <mat-label>Row Key Name</mat-label>
+          <input type="text" name="rowKeyName" placeholder="Row Key Name" matInput formControlName="rowKeyName" />
+          <mat-error *ngIf="viewDetailsFormControls.rowKeyName.errors?.required" >Row Key Name is required</mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-form-field appearance="outline">
+        <mat-label>Fields</mat-label>
+        <mat-chip-list #chipList>
+          <mat-chip *ngFor="let field of getFields.controls; let i = index;" [selectable]="selectable"
+                   [removable]="removable" (removed)="removeField(i)">
+            {{field.value}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input matInput placeholder="Fields Name"
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="addField($event)">
+        </mat-chip-list>
+        <mat-hint>(Add more fields by hitting ENTER)</mat-hint>
+      </mat-form-field>
+      <mat-card-actions class="text-center" >
+        <button mat-raised-button color="primary" class="butn">Update</button>
+    </mat-card-actions>
+    </mat-card>
+  </form>
+</ng-container>
+
+
+

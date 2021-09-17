@@ -1,0 +1,56 @@
+.element-detail {
+  overflow: hidden;
+}
+
+.file-content-action {
+  padding-left: 5px;
+}
+
+
+.mat-grid-tile {
+  span {
+    font-weight: 500;
+    margin-right: 5px;
+  }
+}
+
+.messageDetails {
+  margin-bottom: 15px;
+}
+
+.message-file-content{
+  padding: 40px 20px;
+  .mat-card-title{
+    display: flex;
+  }
+}
+
+
+.mat-spinner {
+  margin: 0 auto;
+}
+.pre-prop {
+  margin-bottom: 0;
+  color: #000;
+  border: 1rem solid #fff;
+  // min-height: 38rem;
+  // max-height: 36rem;
+  // max-width: 90rem;
+  // overflow-y: auto;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  padding: 1.42rem;
+  border-radius: 3px;
+  background: #f2f4f8;
+}
+
+@media(max-width: 800px) {
+
+  :host ::ng-deep .mat-grid-tile {
+    .mat-figure {
+      align-items: center;
+      justify-content: left;
+      padding-left: 10px;
+    }
+  }
+}

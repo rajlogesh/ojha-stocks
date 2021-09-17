@@ -1,0 +1,619 @@
+[
+  {
+    "id": "0001",
+    "name": "HTTP Endpoint",
+    "description": "HTTP Endpoint for receiving messages",
+    "type": "Source",
+    "source": "Internal",
+    "sourceId": "Omplx.Connectors",
+    "sourceLocation": "Internal",
+    "configuration": {
+      "parameters": {
+        "api-key": {
+          "friendlyName": null,
+          "valueType": "SecureString",
+          "defaultValue": "",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": true,
+          "description": null
+        }
+      },
+      "requiredParameters": []
+    },
+    "constraints": {
+      "inletCount": 0,
+      "outletCount": 1,
+      "maxInlets": 0,
+      "maxOutlets": 1
+    }
+  },
+  {
+    "id": "0002",
+    "name": "MQTT Subscription",
+    "description": "MQTT Endpoint for receiving messages",
+    "type": "Source",
+    "source": "Internal",
+    "sourceId": "Omplx.Edge",
+    "sourceLocation": "Internal",
+    "configuration": {
+      "parameters": {
+        "topic-subscription": {
+          "friendlyName": null,
+          "valueType": "String",
+          "defaultValue": "",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        }
+      },
+      "requiredParameters": [
+        "topic-subscription"
+      ]
+    },
+    "constraints": {
+      "inletCount": 0,
+      "outletCount": 1,
+      "maxInlets": 0,
+      "maxOutlets": 1
+    }
+  },
+  {
+    "id": "0003",
+    "name": "Kafka Sink",
+    "description": "Sends to Kafka broker",
+    "type": "Sink",
+    "source": "Internal",
+    "sourceId": "Omplx.Edge",
+    "sourceLocation": "Internal",
+    "configuration": {
+      "parameters": {
+        "broker-host": {
+          "friendlyName": null,
+          "valueType": "String",
+          "defaultValue": "",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        },
+        "topic-name": {
+          "friendlyName": null,
+          "valueType": "String",
+          "defaultValue": "",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        },
+        "credentials": {
+          "friendlyName": null,
+          "valueType": "SecureObject",
+          "defaultValue": "",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        }
+      },
+      "requiredParameters": [
+        "broker-host",
+        "topic-name"
+      ]
+    },
+    "constraints": {
+      "inletCount": 1,
+      "outletCount": 0,
+      "maxInlets": 1,
+      "maxOutlets": 0
+    }
+  },
+  {
+    "id": "0004",
+    "name": "MQTT Sink",
+    "description": "AMQP Endpoint for receiving messages",
+    "type": "Source",
+    "source": "Internal",
+    "sourceId": "Omplx.Edge",
+    "sourceLocation": "Internal",
+    "configuration": {
+      "parameters": {
+        "broker-host": {
+          "friendlyName": null,
+          "valueType": "String",
+          "defaultValue": "",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        },
+        "credentials": {
+          "friendlyName": null,
+          "valueType": "SecureObject",
+          "defaultValue": "",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        }
+      },
+      "requiredParameters": [
+        "topic-subscription"
+      ]
+    },
+    "constraints": {
+      "inletCount": 1,
+      "outletCount": 0,
+      "maxInlets": 1,
+      "maxOutlets": 0
+    }
+  },
+  {
+    "id": "0005",
+    "name": "Split",
+    "description": "Flow splits to two streams",
+    "type": "Gateway",
+    "source": "Internal",
+    "sourceId": "Omplx.Edge",
+    "sourceLocation": "Internal",
+    "configuration": null,
+    "constraints": {
+      "inletCount": 1,
+      "outletCount": 2,
+      "maxInlets": 1,
+      "maxOutlets": 2
+    }
+  },
+  {
+    "id": "0006",
+    "name": "Merge",
+    "description": "Two flows merge into one",
+    "type": "Gateway",
+    "source": "Internal",
+    "sourceId": "Omplx.Edge",
+    "sourceLocation": "Internal",
+    "configuration": null,
+    "constraints": {
+      "inletCount": 2,
+      "outletCount": 1,
+      "maxInlets": 2,
+      "maxOutlets": 1
+    }
+  },
+  {
+    "id": "0007",
+    "name": "Filter Out MessageTypes",
+    "description": "Removes specific MessageTypes from stream",
+    "type": "Filter",
+    "source": "Internal",
+    "sourceId": "Omplx.Edge",
+    "sourceLocation": "Internal",
+    "configuration": {
+      "parameters": {
+        "exclude-message-types": {
+          "friendlyName": null,
+          "valueType": "Object",
+          "defaultValue": "[]",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        }
+      },
+      "requiredParameters": [
+        "exclude-message-types"
+      ]
+    },
+    "constraints": {
+      "inletCount": 1,
+      "outletCount": 1,
+      "maxInlets": 1,
+      "maxOutlets": 1
+    }
+  },
+  {
+    "id": "0008",
+    "name": "Filter To MessageTypes",
+    "description": "Removes undesired MessageTypes from stream",
+    "type": "Filter",
+    "source": "Internal",
+    "sourceId": "Omplx.Edge",
+    "sourceLocation": "Internal",
+    "configuration": {
+      "parameters": {
+        "select-message-types": {
+          "friendlyName": null,
+          "valueType": "Object",
+          "defaultValue": "[]",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        }
+      },
+      "requiredParameters": [
+        "select-message-types"
+      ]
+    },
+    "constraints": {
+      "inletCount": 1,
+      "outletCount": 1,
+      "maxInlets": 1,
+      "maxOutlets": 1
+    }
+  },
+  {
+    "id": "0009",
+    "name": "Encrypt with PGP",
+    "description": "Encrypt message using PGP",
+    "type": "Function",
+    "source": "Service",
+    "sourceId": "Omplx.Connectors",
+    "sourceLocation": "/Connectors/Encryption/PgpEncrypt",
+    "configuration": {
+      "parameters": {
+        "recipient-id": {
+          "friendlyName": null,
+          "valueType": "String",
+          "defaultValue": "",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        },
+        "ascii-armor": {
+          "friendlyName": null,
+          "valueType": "Bool",
+          "defaultValue": "false",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        }
+      },
+      "requiredParameters": [
+        "recipient-id"
+      ]
+    },
+    "constraints": {
+      "inletCount": 1,
+      "outletCount": 1,
+      "maxInlets": 1,
+      "maxOutlets": 1
+    }
+  },
+  {
+    "id": "0010",
+    "name": "Decrypt from PGP",
+    "description": "Decrypt message using PGP",
+    "type": "Function",
+    "source": "Service",
+    "sourceId": "Omplx.Connectors",
+    "sourceLocation": "/Connectors/Encryption/PgpDecrypt",
+    "configuration": {
+      "parameters": {},
+      "requiredParameters": []
+    },
+    "constraints": {
+      "inletCount": 1,
+      "outletCount": 1,
+      "maxInlets": 1,
+      "maxOutlets": 1
+    }
+  },
+  {
+    "id": "0011",
+    "name": "Log",
+    "description": "Log current state of message",
+    "type": "Function",
+    "source": "Internal",
+    "sourceId": "",
+    "sourceLocation": "",
+    "configuration": {
+      "parameters": {
+        "log-header": {
+          "friendlyName": null,
+          "valueType": "String",
+          "defaultValue": "",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        }
+      },
+      "requiredParameters": []
+    },
+    "constraints": {
+      "inletCount": 1,
+      "outletCount": 1,
+      "maxInlets": 1,
+      "maxOutlets": 1
+    }
+  },
+  {
+    "id": "0012",
+    "name": "VOXP Device Data",
+    "description": "VOXP Device Data",
+    "type": "Source",
+    "source": "CustomPlugin",
+    "sourceId": "Omplx.Plugins",
+    "sourceLocation": "/CustomPlugins/Vyaire/VoxpDeviceHost",
+    "configuration": {
+      "parameters": {
+        "listen-port": {
+          "friendlyName": null,
+          "valueType": "Int",
+          "defaultValue": "10005",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        }
+      },
+      "requiredParameters": [
+        "listen-port"
+      ]
+    },
+    "constraints": {
+      "inletCount": 0,
+      "outletCount": 1,
+      "maxInlets": 0,
+      "maxOutlets": 1
+    }
+  },
+  {
+    "id": "0013",
+    "name": "Transform JSON",
+    "description": "Liquid Map JSON Transformation",
+    "type": "Function",
+    "source": "Plugin",
+    "sourceId": "Omplx.Plugins",
+    "sourceLocation": "/Plugins/DataTransformation/LiquidMap",
+    "configuration": {
+      "parameters": {
+        "map-name": {
+          "friendlyName": null,
+          "valueType": "String",
+          "defaultValue": "",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        },
+        "map-content": {
+          "friendlyName": null,
+          "valueType": "Object",
+          "defaultValue": "",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        }
+      },
+      "requiredParameters": []
+    },
+    "constraints": {
+      "inletCount": 1,
+      "outletCount": 1,
+      "maxInlets": 1,
+      "maxOutlets": 1
+    }
+  },
+  {
+    "id": "0014",
+    "name": "Transform XML",
+    "description": "XSLT Transformation",
+    "type": "Function",
+    "source": "Plugin",
+    "sourceId": "Omplx.Plugins",
+    "sourceLocation": "/Plugins/DataTransformation/XSLT",
+    "configuration": {
+      "parameters": {
+        "map-name": {
+          "friendlyName": null,
+          "valueType": "String",
+          "defaultValue": "",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        },
+        "map-content": {
+          "friendlyName": null,
+          "valueType": "Object",
+          "defaultValue": "",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        }
+      },
+      "requiredParameters": []
+    },
+    "constraints": {
+      "inletCount": 1,
+      "outletCount": 1,
+      "maxInlets": 1,
+      "maxOutlets": 1
+    }
+  },
+  {
+    "id": "0015",
+    "name": "CSV to JSON",
+    "description": "CSV to JSON transformation",
+    "type": "Function",
+    "source": "Plugin",
+    "sourceId": "Omplx.Plugins",
+    "sourceLocation": "/Plugins/DataTransformation/CsvToJson",
+    "configuration": {
+      "parameters": {
+        "select-fields": {
+          "friendlyName": null,
+          "valueType": "Object",
+          "defaultValue": "[]",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        }
+      },
+      "requiredParameters": []
+    },
+    "constraints": {
+      "inletCount": 1,
+      "outletCount": 1,
+      "maxInlets": 1,
+      "maxOutlets": 1
+    }
+  },
+  {
+    "id": "0016",
+    "name": "JSON to CSV",
+    "description": "JSON to CSV transformation",
+    "type": "Function",
+    "source": "Plugin",
+    "sourceId": "Omplx.Plugins",
+    "sourceLocation": "/Plugins/DataTransformation/JsonToCsv",
+    "configuration": {
+      "parameters": {
+        "select-fields": {
+          "friendlyName": null,
+          "valueType": "Object",
+          "defaultValue": "[]",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        }
+      },
+      "requiredParameters": []
+    },
+    "constraints": {
+      "inletCount": 1,
+      "outletCount": 1,
+      "maxInlets": 1,
+      "maxOutlets": 1
+    }
+  },
+  {
+    "id": "0017",
+    "name": "CSV to XML",
+    "description": "CSV to XML transformation",
+    "type": "Function",
+    "source": "Plugin",
+    "sourceId": "Omplx.Plugins",
+    "sourceLocation": "/Plugins/DataTransformation/CsvToXml",
+    "configuration": {
+      "parameters": {
+        "select-fields": {
+          "friendlyName": null,
+          "valueType": "Object",
+          "defaultValue": "[]",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        }
+      },
+      "requiredParameters": []
+    },
+    "constraints": {
+      "inletCount": 1,
+      "outletCount": 1,
+      "maxInlets": 1,
+      "maxOutlets": 1
+    }
+  },
+  {
+    "id": "0018",
+    "name": "XML to CSV",
+    "description": "XML to CSV transformation",
+    "type": "Function",
+    "source": "Plugin",
+    "sourceId": "Omplx.Plugins",
+    "sourceLocation": "/Plugins/DataTransformation/XmlToCsv",
+    "configuration": {
+      "parameters": {
+        "select-fields": {
+          "friendlyName": null,
+          "valueType": "Object",
+          "defaultValue": "[]",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        }
+      },
+      "requiredParameters": []
+    },
+    "constraints": {
+      "inletCount": 1,
+      "outletCount": 1,
+      "maxInlets": 1,
+      "maxOutlets": 1
+    }
+  },
+  {
+    "id": "0019",
+    "name": "Filter by XPATH",
+    "description": "Ensures Messages have an XPATH match",
+    "type": "Filter",
+    "source": "Internal",
+    "sourceId": "Omplx.Edge",
+    "sourceLocation": "Internal",
+    "configuration": {
+      "parameters": {
+        "match-xpaths": {
+          "friendlyName": null,
+          "valueType": "Object",
+          "defaultValue": "[]",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        }
+      },
+      "requiredParameters": [
+        "match-xpaths"
+      ]
+    },
+    "constraints": {
+      "inletCount": 1,
+      "outletCount": 1,
+      "maxInlets": 1,
+      "maxOutlets": 1
+    }
+  },
+  {
+    "id": "0020",
+    "name": "Filter by JSON Path",
+    "description": "Ensures Messages have a JSON match",
+    "type": "Filter",
+    "source": "Internal",
+    "sourceId": "Omplx.Edge",
+    "sourceLocation": "Internal",
+    "configuration": {
+      "parameters": {
+        "match-json-paths": {
+          "friendlyName": null,
+          "valueType": "Object",
+          "defaultValue": "[]",
+          "currentValue": null,
+          "allowedValues": null,
+          "encrypted": false,
+          "description": null
+        }
+      },
+      "requiredParameters": [
+        "match-json-paths"
+      ]
+    },
+    "constraints": {
+      "inletCount": 1,
+      "outletCount": 1,
+      "maxInlets": 1,
+      "maxOutlets": 1
+    }
+  }
+]

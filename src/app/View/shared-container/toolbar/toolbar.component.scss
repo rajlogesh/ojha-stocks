@@ -1,0 +1,20 @@
+.app-toolbar {
+    .title {
+        img {
+            position: relative;
+            top: 7px;
+            height: 38px;
+        }
+    }
+    .first-row {
+        position: fixed;
+        z-index: 1000;
+        background-color: #3e1685;
+    }
+    .second-row {
+        position: relative;
+        margin-top: 64px;
+        color: white;
+        padding: 10px 10px 10px 40px;
+    }
+}

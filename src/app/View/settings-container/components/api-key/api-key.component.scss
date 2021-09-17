@@ -1,0 +1,36 @@
+@media (min-width: 768px) {
+  .api-key-section {
+    width: 60%;
+    margin: 30px auto;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .api-key-section {
+    width: 80%;
+    margin: 30px auto;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .api-key-section {
+    width: 95%;
+    margin: 20px auto;
+  }
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.api-key-form {
+  text-align: center;
+}
+
+.api-ket-delete-button {
+  margin-left: 15px;
+}
+
+.mat-spinner {
+  margin: 0 auto;
+}

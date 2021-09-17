@@ -1,0 +1,108 @@
+<ng-container>
+  <mat-card class="edge-nav" *ngIf="loading===false">
+    <div class="flex">
+      <h3 class="h3-content">
+        <span class="header-wrapper">
+          <a [routerLink]="['/edges']" class="text-primary">Edges</a>
+        </span>
+        <mat-icon class="mat-icon-header">chevron_right</mat-icon>
+
+        <span class="header-wrapper">
+          <a routerLink (click)="backToServices()" class="text-primary">Services</a>
+        </span>
+        <mat-icon class="mat-icon-header">chevron_right</mat-icon>
+
+        <span class="header-wrapper">
+          <a routerLink (click)="backToServices()" class="text-primary">{{ this.edgeServiceId }}</a>
+
+        </span>
+        <mat-icon class="mat-icon-header">chevron_right</mat-icon>
+
+        <span class="header-wrapper"><a routerLink (click)="location.back()" class="text-primary">logs</a></span>
+        <mat-icon class="mat-icon-header">chevron_right</mat-icon>
+
+        <span class="header-wrapper">{{this.logId}}</span>
+      </h3>
+      <span class="spacer"></span>
+      <div class="btn flex">
+        <button mat-button (click)="location.back()">
+          <mat-icon>chevron_left</mat-icon>
+          Back
+        </button>
+      </div>
+    </div>
+  </mat-card>
+</ng-container>
+
+<section *ngIf="loading===true">
+  <mat-card class="edge-service-logs-section">
+    <mat-spinner [diameter]="50" [strokeWidth]="2"></mat-spinner>
+  </mat-card>
+</section>
+
+<section *ngIf="loading===false && userFeedback==='logErr'">
+  <mat-card class="edge-service-logs-section">
+    Sorry! Something went wrong while fetching the data.
+  </mat-card>
+</section>
+
+<section *ngIf="loading===false && userFeedback==='none'">
+  <mat-card class="logDetails edge-nav" >
+    <mat-card-content>
+      <mat-grid-list [cols]="breakpoint" rowHeight="50px" (window:resize)="onResize($event)">
+        <mat-grid-tile>
+          <span>Log ID: </span>
+          <a>
+            {{ logInfo.id }}
+          </a>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <span>Service ID: </span>
+          <a>
+            {{ logInfo.edgeServiceId }}
+          </a>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <span>File Name: </span>
+          <a>
+            {{ logInfo.fileName }}
+          </a>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <span>Content Type: </span>
+          <a>
+            {{ logInfo.contentType || "-" }}
+          </a>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <span>Time Stamp: </span>
+          <a>
+            {{ logInfo.timestamp | date: "longDate" }} at
+            {{ logInfo.timestamp | date: "shortTime" }}
+          </a>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+<section [hidden]="!(loading===false && userFeedback==='none')">
+  <mat-card class="log-file-content edge-nav" >
+    <mat-card-title class="flex">
+      Log Content
+      <span class="spacer"></span>
+      <span class="view-log-content">
+        <button mat-raised-button color="primary" (click)="onDownloadLog()">
+          <span> Download</span>
+        </button>
+      </span>
+    </mat-card-title>
+    <mat-card-content>
+        <ng-container >
+          <pre class='pre-prop'>{{ logContent }}</pre>
+        </ng-container>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+<button mat-mini-fab *ngIf="isShow" (click)="gotoTop()" color="primary" class="scrollTop"> <mat-icon>expand_less</mat-icon></button>

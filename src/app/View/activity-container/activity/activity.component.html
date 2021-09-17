@@ -1,0 +1,33 @@
+<section class="activity-section">
+  <ng-container *ngIf="viewMessageDetail===false">
+    <app-activity-tool-bar
+      [loading$]="loading$"
+      [dsControls$]="dsControls$"
+      (durationChanged)="durationChanged($event)"
+      (searchTerm)="searchTerm($event)"
+      (requestDS)="requestDS($event)"
+    ></app-activity-tool-bar>
+  </ng-container>
+  <mat-card class="feedback" *ngIf="nextPageNotAvailable" >
+    Sorry, next page not available. This is the last page of activity message.
+  </mat-card>
+  <div>
+    <ng-container *ngIf="viewMessageDetail===true">
+      <app-activity-message-list
+        [detail]="messageData"
+        [fileContent$]="fileContent$"
+        (backToResult)="messageDetail($event)"
+        (viewFileContent)="viewFileContent($event)"
+        (downloadFileContent)="downloadFileContent($event)"
+      ></app-activity-message-list>
+    </ng-container>
+    <ng-container *ngIf="viewMessageDetail===false">
+      <app-activity-data-table
+        [message$]="message$"
+        [loading$]="loading$"
+        [searchTerm$]="searchTerm$"
+        (messageDetail)="messageDetail($event)"
+      ></app-activity-data-table>
+    </ng-container>
+  </div>
+</section>

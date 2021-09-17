@@ -1,0 +1,133 @@
+.edge-nav {
+  margin: 20px;
+  button{
+    margin-right: 10px;
+  }
+}
+.grid {
+  display: grid;
+  grid-template-columns: auto auto
+}
+.update-edge-container {
+  margin: 20px;
+  .mat-card-content {
+    text-align: center;
+  }
+  .mat-card-actions {
+    text-align: center;
+  }
+  .mat-form-field {
+    width: 100%;
+  }
+}
+.mat-headline {
+  padding-top: 10px;
+}
+.heartbeats,
+.mat-table,
+.full-width {
+  width: 100%;
+}
+.mat-spinner {
+  margin: 20px auto;
+}
+.view-hb-btn {
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  button {
+    margin-left:10px;
+  }
+
+}
+
+.resp{
+  flex-direction: column;
+}
+
+.log-detail  {
+  margin: 20px;
+}
+
+.edge-service-logs-section
+{
+  margin: 20px;
+  text-align: center;
+}
+
+.h3-content{
+  margin-bottom: 0px !important;
+  font-weight: 500;
+  .mat-icon-header {
+    position: relative;
+    top: 7px;
+  }
+  .text-primary{
+    text-decoration: none;
+  }
+}
+
+.header-wrapper {
+  vertical-align: middle;
+  position: relative;
+}
+
+.mat-row {
+  cursor: pointer;
+}
+.mat-row:hover {
+  background-color: rgb(236, 207, 255);
+}
+
+.message-file-content{
+  padding: 40px 20px;
+  .mat-card-title{
+    display: flex;
+  }
+}
+
+.pre-prop {
+  margin-bottom: 0;
+  color: #000;
+  border: 1rem solid #fff;
+  min-height: 38rem;
+  max-height: 36rem;
+  max-width: 90rem;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  padding: 1.42rem;
+  border-radius: 3px;
+  background: #f2f4f8;
+}
+
+.mobile-label {
+  display: none;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  overflow-x: auto;
+  .mat-paginator,
+  table{
+    min-width: 600px;
+  }
+}
+
+
+@media(max-width: 600px) {
+  .edge-nav{
+    div{
+      flex-direction: column;
+    }
+    .buttons{
+      margin-top: 10px;
+      flex-direction: row;
+      button{
+        width: 50%;
+      }
+    }
+  }
+}

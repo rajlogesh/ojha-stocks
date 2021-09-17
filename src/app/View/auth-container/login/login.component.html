@@ -1,0 +1,38 @@
+<div class="page-container" >
+  <div class="login-container" >
+    <mat-card>
+      <mat-card-title>
+        <span class="login-title" >Ojha-plexus Portal</span>
+      </mat-card-title>
+      <mat-card-content>
+        <ng-container *ngIf="loading" >
+          <mat-progress-spinner
+            class="login-spinner" 
+            color="primary"
+            mode="indeterminate"
+            strokeWidth="5"
+            diameter="60"
+            value="50" ></mat-progress-spinner>
+        </ng-container>
+        <ng-container *ngIf="!is_invited && !loading" >
+          <app-login-form (signInEvent)="normalSignIn($event)" 
+            [loginError]="loginError" ></app-login-form>
+        </ng-container>
+        <ng-container *ngIf="is_invited && !loading && !confirmInvitee" >
+            <app-invitation-form (invitationSignIn)="invitationSignIn($event)"
+              [invitationError]="invitationError" ></app-invitation-form>
+        </ng-container>
+        <ng-container *ngIf="is_invited && !loading && confirmInvitee" >
+          <app-confirm-invitation [invitee]="invitee"
+            [inviteeRegistrationError]="inviteeRegistrationError"
+            [inviteeLoginError]="inviteeLoginError"
+            (RALInvitee)="RALInvitee($event)" ></app-confirm-invitation>
+        </ng-container>
+      </mat-card-content>
+      <mat-card-actions>
+        <a  *ngIf="!is_invited && !loading"  (click)="toggleInvitation()" >Signing with invitation code?</a>        
+        <a  *ngIf="is_invited && !loading"  (click)="toggleInvitation()" >Want to sign in with a password?</a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

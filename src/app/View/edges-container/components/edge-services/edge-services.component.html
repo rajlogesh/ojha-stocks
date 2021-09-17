@@ -1,0 +1,140 @@
+<mat-card class="edge-nav" *ngIf="loading===false" >
+  <div class="flex">
+    <h3 class="edge-title" >Edge Services</h3>
+    <span class="spacer"></span>
+    <button mat-button (click)="backToEdge()" >
+      <mat-icon>chevron_left</mat-icon>
+      Back to Edges
+    </button>
+  </div>
+</mat-card>
+<mat-card class="edge-nav" *ngIf="loading===true" >
+  <mat-spinner [diameter]="50" [strokeWidth]="2" ></mat-spinner>
+</mat-card>
+<ng-container *ngIf="userFeedback==='servicelistfailure'" >
+  <mat-card class="edge-nav" >
+    Failed to retrieve the services List.
+  </mat-card>
+</ng-container>
+<ng-container *ngIf="userFeedback==='heartbeatfailure'" >
+  <mat-card class="edge-nav" >
+    Failed to retrieve the hearbeats for the requested service.
+  </mat-card>
+</ng-container>
+<ng-container *ngIf="userFeedback==='manifestempty'" >
+  <mat-card class="edge-nav" >
+    No manifest found for the requested service.
+  </mat-card>
+</ng-container>
+<ng-container *ngIf="userFeedback==='heartbeatempty'" >
+  <mat-card class="edge-nav" >
+    No heartbeats found for the requested service.
+  </mat-card>
+</ng-container>
+<ng-container *ngIf="userFeedback==='manifestfailure'" >
+  <mat-card class="edge-nav" >
+    Failed to retrieve the manifest for the requested service.
+  </mat-card>
+</ng-container>
+<ng-container *ngIf="userFeedback === 'none' && ServiceAvailable === false && loading === false" >
+  <mat-card class="edge-nav" >
+    <h3>Sorry No services available for this edge.</h3>
+  </mat-card>
+</ng-container>
+<ng-container *ngIf="userFeedback === 'none' && ServiceAvailable === true && loading===false" >
+  <ng-container *ngFor="let service of serviceList; let i=index;" >
+    <mat-card class="edge-nav" >
+      <div class="grid">
+        <div class="tile">
+          <span class="mat-body-strong" >{{ service.id || '-' }}</span>
+          <h5 class="mat-caption" >ID</h5>
+        </div>
+        <div class="tile" >
+          <span class="mat-body-strong" >{{ service.name || '-'  }}</span>
+          <h5 class="mat-caption" >Name</h5>
+        </div>
+        <div class="tile" >
+          <span class="mat-body-strong" >{{ service.groupId || '-'  }}</span>
+          <h5 class="mat-caption" >Group Id</h5>
+        </div>
+        <div class="tile" >
+          <span class="mat-body-strong" >{{ service.serviceType || '-'  }}</span>
+          <h5 class="mat-caption" >Service Type</h5>
+        </div>
+        <div class="tile"  >
+          <span class="mat-body-strong" >{{ service.location || '-'  }}</span>
+          <h5 class="mat-caption" >Location</h5>
+        </div>
+        <div class="tile" >
+          <span class="mat-body-strong" >{{ service.apiPortNumber || '-'  }}</span>
+          <h5 class="mat-caption" >API Port Number</h5>
+        </div>
+        <div class="tile" >
+          <span class="mat-body-strong" >{{ service.status || '-'  }}</span>
+          <h5 class="mat-caption" >Status</h5>
+        </div>
+        <div class="tile" >
+          <span class="mat-body-strong" >{{ (service.statusTime | date:'medium') || '-'  }}</span>
+          <h5 class="mat-caption" >Status Time</h5>
+        </div>
+        <div class="tile" >
+          <span class="mat-body-strong" >{{ (service.createdTime | date:'medium') || '-'  }}</span>
+          <h5 class="mat-caption" >Created Time</h5>
+        </div>
+        <div class="tile" >
+          <span class="mat-body-strong" >{{ service.createdBy || '-'  }}</span>
+          <h5 class="mat-caption" >Created By</h5>
+        </div>
+        <div class="tile" >
+          <span class="mat-body-strong" >{{ (service.lastModifiedTime | date:'medium') || '-'  }}</span>
+          <h5 class="mat-caption" >Last Modified Time</h5>
+        </div>
+        <div class="tile" >
+          <span class="mat-body-strong" >{{ service.lastModifiedBy || '-'  }}</span>
+          <h5 class="mat-caption" >Last Modified By</h5>
+        </div>
+        <div class="tile" >
+        </div>
+      </div>
+      <div class="flex view-hb-btn" >
+        <span class="spacer"></span>
+        <ng-container>
+          <button mat-raised-button color="primary" (click)="viewLogs(service.id)">View Logs</button>
+        </ng-container>
+        <div class="toggle-btn flex">
+          <ng-container  *ngIf="isMFVisible(service.id)">
+              <button mat-raised-button color="primary" (click)="hideManifest(service.id)" >Hide Manifest</button>
+          </ng-container>
+          <ng-container *ngIf="!isMFVisible(service.id)">
+              <button mat-raised-button color="primary" (click)="requestManifest(service.id,i)" >View Manifest</button>
+          </ng-container>
+          <ng-container *ngIf="isHBVisible(service.id)" >
+            <button mat-raised-button color="primary" (click)="hideHeartBeats(service.id)" >Hide Heartbeats</button>
+          </ng-container>
+          <ng-container *ngIf="!isHBVisible(service.id)" >
+            <button mat-raised-button color="primary" (click)="requestHearbeats(service.id, i)" >View Heartbeats</button>
+          </ng-container>
+        </div>
+
+      </div>
+      <div *ngIf="service.hbloading " >
+        <mat-spinner [diameter]="50" [strokeWidth]="2" ></mat-spinner>
+      </div>
+      <div *ngIf="service.mfloading===true" >
+        <mat-spinner [diameter]="50" [strokeWidth]="2" ></mat-spinner>
+      </div>
+      <app-edges-heartbeats
+        [hidden]="!isHBVisible(service.id)"
+        [heartbeatList]="service.serviceList"
+      ></app-edges-heartbeats>
+      <app-edges-manifest
+        [hidden]="!isMFVisible(service.id)"
+        [manifestList]="service.manifest"
+      ></app-edges-manifest>
+      <!-- <app-edges-logs
+        [LogList]="service.serviceList"
+      >
+    </app-edges-logs> -->
+    </mat-card>
+  </ng-container>
+</ng-container>

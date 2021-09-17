@@ -1,0 +1,25 @@
+<mat-tab-group (selectedIndexChange)="setTabValue($event)" [selectedIndex]="getTabValue()">
+  <mat-tab label="View">
+      <app-interdata-view
+      (openViewDetail)="openViewDetail($event)"
+      (fetchViewList)="fetchViewList($event)"
+      (getViewPageInfo)="getViewPageInfo($event)"
+      (deleteConfirmation)="deleteViewConfirmation($event)"
+      [viewList]="viewList"
+      [viewPageInfo]="viewPageInfo"
+      [viewListFetchError]="viewListFetchError"
+      ></app-interdata-view>
+  </mat-tab>
+  <mat-tab label="Tables">
+      <app-interdata-table
+      (openTableDetail)="openTableDetail($event)"
+      (fetchTableList)="fetchTableList($event)"
+      (getTablePageInfo)="getTablePageInfo($event)"
+      (deleteConfirmation)="deleteConfirmation($event)"
+      (displayTableRecord)="displayTableRecord($event)"
+      [tableList]="tableList"
+      [tablePageInfo]="tablePageInfo"
+      [tableListFetchError]="tableListFetchError"
+      ></app-interdata-table>
+  </mat-tab>
+</mat-tab-group>

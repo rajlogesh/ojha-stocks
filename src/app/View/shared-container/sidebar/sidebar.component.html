@@ -1,0 +1,32 @@
+<div [class.sn-is-mobile]="mobileQuery.matches" >
+    <mat-sidenav-container class="sidenav-container" [hasBackdrop]="false" >
+        <mat-sidenav #snav
+            [mode]="'over'"
+            [fixedInViewport]="true"
+            [fixedTopGap]="56" >
+            <mat-nav-list>
+            	<a mat-list-item [routerLink]="['/interdata/views']" (click)="toggleSideBar($event)" >
+                    <mat-icon>grid_on</mat-icon>
+                    <span>Interdata</span>
+                </a>
+                <mat-divider></mat-divider>
+                <a mat-list-item [routerLink]="['/edges']" (click)="toggleSideBar($event)" >
+                    <mat-icon>linear_scale</mat-icon>
+                    <span>Edges</span>
+                </a>
+                <mat-divider></mat-divider>
+                <a mat-list-item [routerLink]="['/activity']" (click)="toggleSideBar($event)" >
+                    <mat-icon>restore</mat-icon>
+                    <span>Activity</span>
+                </a>
+                <mat-divider></mat-divider>
+            </mat-nav-list>
+        </mat-sidenav>
+        <app-toolbar (sidebarToggle)="toggleSideBar($event)"
+            (logoutEvent)="doLogout($event)"
+            [pageTitle]="pageTitle"
+            [showTitleBar]="showTitleBar"
+            [menuIconState]="menuState"  ></app-toolbar>
+        <router-outlet></router-outlet>
+    </mat-sidenav-container>
+</div>

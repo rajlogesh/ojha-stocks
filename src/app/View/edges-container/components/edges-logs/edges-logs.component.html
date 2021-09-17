@@ -1,0 +1,92 @@
+<ng-container>
+  <mat-card class="edge-nav" *ngIf="loading===false">
+    <div class="flex">
+      <h3 class="h3-content">
+        <span class="header-wrapper">
+          <a [routerLink]="['/edges']" class="text-primary">Edges</a>
+        </span>
+        <mat-icon class="mat-icon-header">chevron_right</mat-icon>
+
+        <span class="header-wrapper">
+          <a routerLink (click)="backToServices()" class="text-primary">Services</a>
+        </span>
+        <mat-icon class="mat-icon-header">chevron_right</mat-icon>
+
+        <span class="header-wrapper">
+          <a routerLink (click)="backToServices()" class="text-primary">{{ this.edgeServiceId }}</a>
+
+        </span>
+        <mat-icon class="mat-icon-header">chevron_right</mat-icon>
+
+        <span class="header-wrapper">logs</span>
+      </h3>
+      <span class="spacer"></span>
+      <div class="buttons flex">
+        <button mat-button  [disabled]="!ppAvailable" (click)="prevDS();">
+          <mat-icon>first_page</mat-icon>
+          Prev {{pageLength}}
+        </button>
+        <button mat-button  [disabled]="!npAvailable" (click)="nextDS();">
+          Next {{pageLength}}
+          <mat-icon>last_page</mat-icon>
+        </button>
+      </div>
+      <button mat-button (click)="backToServices()">
+        <mat-icon>chevron_left</mat-icon>
+        Back
+      </button>
+    </div>
+  </mat-card>
+</ng-container>
+<section *ngIf="loading===true">
+  <mat-card class="edge-service-logs-section">
+    <mat-spinner [diameter]="50" [strokeWidth]="2"></mat-spinner>
+  </mat-card>
+</section>
+<section *ngIf="loading===false && userFeedback==='logNF'">
+  <mat-card class="edge-service-logs-section">
+    Sorry! No Logs found for this Edge service.
+  </mat-card>
+</section>
+<section *ngIf="loading===false && userFeedback==='logErr'">
+  <mat-card class="edge-service-logs-section">
+    Sorry! Something went wrong while fetching the data.
+  </mat-card>
+</section>
+
+<section class="log-detail mat-elevation-z1" [hidden]="!(loading===false && userFeedback==='none')">
+  <mat-card class="example-container mat-elevation-z0 ">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="fileName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> File Name </th>
+        <td mat-cell *matCellDef="let row"> {{row.fileName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="contentType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Content Type </th>
+        <td mat-cell *matCellDef="let row"> {{row.contentType}} </td>
+      </ng-container>
+      <ng-container matColumnDef="timestamp">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Timestamp </th>
+        <td mat-cell *matCellDef="let row"> {{ row.timestamp | date:'medium' }} </td>
+      </ng-container>
+      <!-- <ng-container *ngFor="let column of displayedColumns" matColumnDef="{{column}}">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column | uppercase }} </th>
+        <td mat-cell *matCellDef="let row"> {{row[column]}} </td>
+      </ng-container> -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="viewLogContent(row)"></tr>
+    </table>
+    <mat-paginator class="" [length]="pageLength" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+      (page)="onPaginateChange($event)" showFirstLastButtons></mat-paginator>
+  </mat-card>
+</section>
+
+<section *ngIf="loading===false && userFeedback==='logLoaded'">
+  <mat-card class="message-file-content " >
+    <mat-card-content>
+      <ng-container>
+        <pre class='pre-prop'></pre>
+      </ng-container>
+    </mat-card-content>
+  </mat-card>
+</section>

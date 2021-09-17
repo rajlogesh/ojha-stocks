@@ -1,0 +1,42 @@
+<form [formGroup]="confirmInvitationForm" (ngSubmit)="confirmInvitation()" >
+  <mat-form-field appearance="outline" >
+    <mat-label>First Name</mat-label>
+    <input type="text" matInput placeholder="First Name" name="first-name" formControlName="firstName" />
+    <mat-error *ngIf="CIFormControls.firstName.errors?.required" >Enter the first name</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" >
+    <mat-label>Last Name</mat-label>
+    <input type="text" matInput placeholder="Last Name" name="last-name" formControlName="lastName" />
+    <mat-error *ngIf="CIFormControls.lastName.errors?.required" >Enter the last name</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" >
+    <mat-label>Email</mat-label>
+    <input type="text" matInput placeholder="Email" name="email" formControlName="emailId" readonly />
+    <mat-error *ngIf="CIFormControls.emailId.errors?.required" >Enter the email Id</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" >
+    <mat-label>Invitation Code</mat-label>
+    <input type="text" matInput placeholder="Invitation Code" name="invitation-code" formControlName="invitationCode" readonly />
+    <mat-error *ngIf="CIFormControls.invitationCode.errors?.required" >Invitation Code</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" >
+    <mat-label>Password</mat-label>
+    <input type="password" matInput placeholder="Password" name="password" formControlName="password" />
+    <mat-error *ngIf="CIFormControls.password.errors?.required" >Kindly enter the password</mat-error>
+    <mat-error *ngIf="CIFormControls.password.errors?.minlength" >Password must have atleast 6 characters in length.</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline" >
+    <mat-label>Confirm Password</mat-label>
+    <input type="password" matInput placeholder="Confirm Password" name="confirm-password" formControlName="confirmPassword" />
+  </mat-form-field>
+  <button type="submit" mat-raised-button color="primary" [disabled]="!confirmInvitationForm.valid" >Login</button>
+  <mat-error *ngIf="confirmInvitationForm.get('confirmPassword').errors && confirmInvitationForm.get('confirmPassword').errors.ConfirmPassword" >
+    Password and confirm password are not same.
+  </mat-error>
+  <mat-error class="form-feedback" *ngIf="inviteeLoginError" >
+    Invitation registration success. Try logging in using the login window.
+  </mat-error>  
+  <mat-error class="form-feedback" *ngIf="inviteeRegistrationError" >
+    Failed to register using the invitation code. Kindly check the invitation code and other credentials.
+  </mat-error>
+</form>

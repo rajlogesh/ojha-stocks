@@ -1,0 +1,66 @@
+.page-container {
+  width: 100vw;
+  // height: 101vh;
+  // background-color: skyblue;
+  background-image: url('/assets/login-bg.jpg');
+  background-size: cover;
+  .login-container {
+    width: 35vw;
+    margin: 0 auto;
+    padding: 25vh;
+    text-align: left;
+    .mat-card {
+      .mat-card-title {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .mat-card-content {
+        padding-left: 20px;
+        padding-right: 20px;
+        .login-spinner {
+          margin: 0 auto;
+          margin-top: 60px;
+          margin-bottom: 60px;
+        }
+      }
+      .mat-card-actions {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        text-align: right;
+        cursor: pointer;
+      }
+      .mat-card-title {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        .login-title {
+          font-size: 20px;
+        }
+      }
+      .mat-form-field {
+        width: 100%;
+      }
+
+    }
+  }
+}
+
+@media screen and (max-width: 800px){
+
+  .login-container{
+    width: 50vw !important;
+    padding: 25vh 0vh !important;
+    margin: 0 auto !important;
+  }
+
+}
+
+@media screen and (max-width: 568px){
+
+  .login-container{
+    width: 80vw !important;
+    padding:15vh 0vh;
+  }
+
+}
+

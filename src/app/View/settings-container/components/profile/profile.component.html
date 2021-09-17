@@ -1,0 +1,29 @@
+<section class="profile-section" >
+  <mat-card>
+    <mat-card-content>
+      <ng-container *ngIf="loading===true" >
+        <mat-spinner [diameter]="100" [strokeWidth]="3" ></mat-spinner>
+      </ng-container>
+      <ng-container *ngIf="loading===false" >
+      <form class="profile-form" >
+        <mat-form-field appearance="outline" >
+          <mat-label>User ID</mat-label>
+          <input type="email" name="userId" matInput placeholder="User ID" readonly [value]="profileDetails['id']" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" >
+          <mat-label>First Name</mat-label>
+          <input type="text" name="firstName" matInput placeholder="First Name" readonly [value]="profileDetails['firstName']" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" >
+          <mat-label>Last Name</mat-label>
+          <input type="text" name="lastName" matInput placeholder="Last Name" readonly [value]="profileDetails['lastName']" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" >
+          <mat-label>Email</mat-label>
+          <input type="email" name="email" matInput placeholder="Email" readonly [value]="profileDetails['email']" />
+        </mat-form-field>
+      </form>
+      </ng-container>
+    </mat-card-content>
+  </mat-card>
+</section>

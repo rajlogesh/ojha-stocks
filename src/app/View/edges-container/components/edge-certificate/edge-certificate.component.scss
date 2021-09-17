@@ -1,0 +1,65 @@
+.edge-nav {
+  margin: 20px;
+  .edge-title {
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+}
+
+.mat-spinner {
+  margin: 20px auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: auto auto
+}
+
+.create-edge-container {
+  margin: 20px;
+  .mat-card-content {
+    text-align: center;
+  }
+  .mat-card-actions {
+    text-align: center;
+  }
+  .mat-form-field {
+    width: 100%;
+  }
+}
+
+
+@media screen and (max-width: 700px) {
+
+  .grid {
+    grid-template-columns: auto
+  }
+
+ }
+
+@media screen and (max-width: 390px) {
+
+  .grid {
+    grid-template-columns: auto;
+    overflow-wrap: anywhere;
+  }
+
+}
+
+@media screen and (max-width: 370px) {
+
+  .grid {
+    grid-template-columns: auto;
+    overflow-wrap: anywhere;
+  }
+
+  .edge-nav{
+    div{
+      flex-direction: column;;
+      button{
+       justify-content: center;
+     }
+    }
+  }
+
+}

@@ -1,0 +1,32 @@
+.edge-nav {
+  margin: 20px;
+  .edge-title {
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+}
+.create-edge-container {
+  margin: 20px;
+  .mat-card-content {
+    text-align: center;
+  }
+  .mat-card-actions {
+    text-align: center;
+  }
+  .mat-form-field {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 370px) {
+
+  .edge-nav{
+    div{
+      flex-direction: column;;
+      button{
+       justify-content: center;
+     }
+    }
+  }
+
+ }

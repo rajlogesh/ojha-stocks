@@ -1,0 +1,63 @@
+<mat-card class="activity-filter-section">
+  <ng-container *ngIf="loading$ | async">
+    <mat-spinner
+      class="spinner-loader"
+      [diameter]="40"
+      [strokeWidth]="2"
+    ></mat-spinner>
+  </ng-container>
+  <ng-container *ngIf="!(loading$ | async)">
+    <div class="activity-toolbar">
+      <h3 class="at-title">Recent Activity</h3>
+      <mat-form-field class="duration-container" appearance="outline">
+        <mat-label class="duration-label">Duration Filter</mat-label>
+        <mat-select
+          class="filter-duration"
+          (selectionChange)="filterChanged($event.value)"
+          [(value)]="durationFilterSelected"
+        >
+          <mat-option [value]="10">Last 10 Mins</mat-option>
+          <mat-option [value]="30">Last 30 Mins</mat-option>
+          <mat-option [value]="60">Last Hour</mat-option>
+          <mat-option [value]="720">Last 12 Hours</mat-option>
+          <mat-option [value]="1440">Last 24 Hours</mat-option>
+          <mat-option [value]="10080">Last Week</mat-option>
+          <mat-option [value]="43200">Last 30 Days</mat-option>
+          <mat-option [value]="86400">Last 60 Days</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="search-container" appearance="outline">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Search" name="activitySearch" (keyup)="activityFilter($event)" />
+      </mat-form-field>
+      <span class="spacer"></span>
+      <div class="btn flex">
+        <ng-container *ngIf="!(loading$ | async)">
+          <button mat-icon-button class="at-rf" (click)="refreshMA()" >
+            <mat-icon>refresh</mat-icon>
+          </button>
+        </ng-container>
+        <button
+          mat-button
+          color="primary"
+          class="nextPageBtn"
+          [disabled]="fpDisabled"
+          (click)="prevDS();"
+        >
+          <mat-icon>first_page</mat-icon>
+          Previous {{ limit }}
+        </button>
+        <button
+          mat-button
+          color="primary"
+          class="nextPageBtn"
+          [disabled]="lpDisabled"
+          (click)="nextDS();"
+        >
+          Next {{ limit }}
+          <mat-icon>last_page</mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</mat-card>

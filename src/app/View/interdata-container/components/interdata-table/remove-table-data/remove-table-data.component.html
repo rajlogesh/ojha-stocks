@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Confirm Deletion</h2>
+<div mat-dialog-content>
+    <p>Are you sure?</p>
+</div>
+<div mat-dialog-actions class="action-position">
+    <span class="spacer"></span>
+     <button mat-raised-button (click)="onNoClick('cancle')"  class="btn-cancel">Cancel</button>
+     <button mat-raised-button (click)="onNoClick('delete')" color="primary">Ok</button>
+</div>
+
+

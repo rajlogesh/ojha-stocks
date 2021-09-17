@@ -1,0 +1,54 @@
+table {
+  width: 100%;
+}
+
+tr.detail-row {
+  height: 0;
+  overflow: hidden;
+}
+
+.loader {
+  .mat-spinner {
+    margin: 20px auto;
+  }
+}
+
+.fullwidth {
+  width: 100%;
+}
+
+.element-row {
+  position: relative;
+}
+
+.element-row:not(.expanded) {
+  cursor: pointer;
+}
+
+.element-row.expanded {
+  border-bottom-color: transparent;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.squarecard {
+  border-radius: 0px;
+}
+
+.mat-row:hover {
+  background-color: rgb(236, 207, 255);
+}
+
+.table-wrapper{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  overflow-x: auto;
+  .mat-paginator,
+  table.mat-table{
+    min-width: 675px;
+  }
+}

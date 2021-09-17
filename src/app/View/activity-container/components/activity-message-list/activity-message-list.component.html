@@ -1,0 +1,110 @@
+<mat-card class="messageDetails" >
+  <mat-card-content>
+    <mat-grid-list [cols]="breakpoint" [rowHeight]="rowHeight" (window:resize)="onResize($event)">
+      <mat-grid-tile-header class="flex" >
+        <button mat-button color="primary" (click)="backToResults()" >
+          <mat-icon>chevron_left</mat-icon>
+          <span>Back to Results</span>
+        </button>
+        <span class="spacer"></span>
+        <button mat-raised-button color="primary" (click)="doFileDownload()" >
+          Download
+        </button>
+      </mat-grid-tile-header>
+      <mat-grid-tile [colspan]="breakpoint">
+        <mat-divider></mat-divider>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <span>File Name: </span>
+        <a>
+          {{ detail.label || detail.messageReferenceId }}
+        </a>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <span>Created Time: </span>
+        <a>
+          {{ detail.createdTime | date: "longDate" }} at
+          {{ detail.createdTime | date: "shortTime" }}
+        </a>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <span>Updated Time: </span>
+        <a>
+          {{ detail.updatedTime | date: "longDate" }} at
+          {{ detail.updatedTime | date: "shortTime" }}
+        </a>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <span>Message Type: </span>
+        <a>
+          {{ detail.messageType || "-" }}
+        </a>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <span>Message Type Version: </span>
+        <a>
+          {{ detail.messageTypeVersion || "-" }}
+        </a>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <span>Sender: </span>
+        <a>
+          {{ detail.sender || "-" }}
+        </a>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <span>Source: </span>
+        <a>
+          {{ detail.source || "-" }}
+        </a>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <span>Status: </span>
+        <ng-container *ngIf="detail.status.toUpperCase() === 'RECEIVED'">
+          <mat-icon>check_circle</mat-icon>
+        </ng-container>
+        <ng-container *ngIf="detail.status.toUpperCase() !== 'RECEIVED'">
+          <mat-icon>info</mat-icon>
+        </ng-container>
+        <a>
+          {{ (detail.status | titlecase) || "-" }}
+        </a>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <span>Reference Id: </span>
+        <a>
+          {{ detail.messageReferenceId || "-" }}
+        </a>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>
+<mat-card class="message-file-content" >
+  <mat-card-title class="flex">
+    File Content
+    <span class="spacer"></span>
+    <span class="view-file-content">
+      <button mat-raised-button color="primary" (click)="onViewContent()">
+        <span> View Content</span>
+      </button>
+    </span>
+  </mat-card-title>
+  <mat-card-content>
+    <ng-container *ngIf="fileLoading===true" >
+      <mat-spinner [diameter]="50" [strokeWidth]="2" ></mat-spinner>
+    </ng-container>
+    <ng-container *ngIf="fileLoading===false" >
+      <ng-container *ngIf="fileStatus===true" >
+        <pre class='pre-prop'>{{ fileContent }}</pre>
+      </ng-container>
+      <ng-container *ngIf="fileStatus===false">
+        <ng-container *ngIf="fileViewed===false">
+
+        </ng-container>
+        <ng-container *ngIf="fileViewed===true">
+          File coudn't be displayed. Download the file to view its contents.
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </mat-card-content>
+</mat-card>

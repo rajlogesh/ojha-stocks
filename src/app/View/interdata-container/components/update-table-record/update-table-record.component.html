@@ -1,0 +1,80 @@
+<mat-card class="interdatadetail-search-section" *ngIf="loading===false" >
+  <mat-grid-list [cols]="breakpoint" rowHeight="60px" (window:resize)="onResize($event)">
+  <div class="interdatadetail-toolbar">
+      <mat-grid-tile [colspan] = "breakpoint !== 2? '2':'1'">
+        <h3 class="interdatadetail-title">{{ paramsRecord.tableName }} Details</h3>
+      </mat-grid-tile>
+      <mat-grid-tile *ngIf="breakpoint !== 2" colspan = "7"></mat-grid-tile>
+      <mat-grid-tile [colspan] = "breakpoint !== 2? '3':'2'">
+        <button mat-button (click)="location.back()" >
+
+          <mat-icon>chevron_left</mat-icon>
+          Back to Table List
+        </button>
+        <button mat-button
+          (click)="confirmDelete($event)" >
+            <mat-icon>delete</mat-icon>
+            Delete
+        </button>
+      </mat-grid-tile>
+  </div>
+  </mat-grid-list>
+</mat-card>
+<mat-card class="interdatadetail-search-section" *ngIf="loading===true" >
+  <mat-spinner [diameter]="50" [strokeWidth]="2" ></mat-spinner>
+</mat-card>
+<ng-container *ngIf="userFeedback!=='none' && loading!==true" >
+  <form [formGroup]="tableRecordPartitionForm"  (ngSubmit)="updateViewDetails()">
+    <mat-card class="table-details-container" >
+      <mat-card-content  class="table-details-card" *ngFor = "let element of tableDetailsDataName; let i = index">
+        <mat-form-field appearance="outline" >
+          <mat-label>{{element[0]}}</mat-label>
+          <input type="text" name="{{element[0]}}" placeholder="{{element[0]}}" matInput formControlName="{{element[0]}}" />
+          <mat-error>Table Name is required</mat-error>
+        </mat-form-field>
+        <button mat-icon-button matTooltip="Remove item" (click)="removeProperty(i)">
+          <mat-icon>remove_circle</mat-icon>
+        </button>
+      </mat-card-content>
+      <div class="flex">
+        <strong></strong>
+        <span class="spacer"  *ngIf="breakpoint !== 2"></span>
+        <span>
+          <a mat-flat-button color="primary"  (click)="addProperties()">{{addFieldName}}</a>
+        </span>
+      </div>
+      <form *ngIf="addFields" [formGroup]="addPropertyRecordForm" (ngSubmit)="addPropertyRecord()">
+        <mat-card-content>
+
+          <div formArrayName="properties" >
+            <div *ngFor="let properties of getProperties.controls; let i = index" [formGroupName]="i">
+              <mat-form-field class="addForm" appearance="outline">
+                <mat-label>Property Name</mat-label>
+                <input matInput placeholder="Key" type="text" formControlName="propKey" />
+                <mat-error>Key is required</mat-error>
+              </mat-form-field>
+              <mat-form-field class="addForm" appearance="outline">
+                <mat-label>Property Value</mat-label>
+                <input matInput placeholder="Value" type="text" formControlName="propValue" />
+                <mat-error>Value is required</mat-error>
+              </mat-form-field>
+              <mat-card-actions class="text-center" >
+                <button mat-raised-button color="primary" class="butn" >
+                  Add
+                </button>
+              </mat-card-actions>
+            </div>
+          </div>
+        </mat-card-content>
+      </form>
+      <mat-card-actions class="text-center" >
+        <button mat-raised-button color="primary" class="butn">Update</button>
+    </mat-card-actions>
+    </mat-card>
+  </form>
+
+</ng-container>
+
+
+
+

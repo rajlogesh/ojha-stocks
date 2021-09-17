@@ -1,0 +1,75 @@
+<section *ngIf="loading$ | async">
+  <mat-card class="loader" >
+    <mat-spinner [diameter]="100" [strokeWidth]="2"></mat-spinner>
+  </mat-card>
+</section>
+<section *ngIf="(!(loading$ | async) && !(messageActivityAvailable))">
+  <mat-card class="loader" >
+    <h3>Sorry! No message activities found.</h3>
+  </mat-card>
+</section>
+<section [hidden]="!(!(loading$ | async) && (messageActivityAvailable))">
+  <div class="table-wrapper mat-elevation-z0">
+    <table #table mat-table [dataSource]="dataSource" matSort >
+
+      <ng-container matColumnDef="updatedTime" >
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Updated Time</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.updatedTime | date: "mediumDate" }}
+            <small>{{ element.updatedTime | date: "shortTime" }}</small>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="messageType" >
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Message Type</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.messageType }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="label" >
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Label</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.label }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="sender" >
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Sender</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.sender }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="source" >
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Source</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.source }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="messageSize" >
+        <mat-header-cell *matHeaderCellDef mat-sort-header>MessageSize</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            {{ element.messageSize }}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+      <mat-row *matRowDef="let element; let row; columns: columnsToDisplay"
+        matRipple
+        class="element-row"
+        (click)="toggleRow(element)"
+      ></mat-row>
+
+    </table>
+    <mat-paginator
+      matPaginator
+      class="mat-elevation-z1"
+      [length]="pageLength"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageOptions"
+      [showFirstLastButtons]="true"
+    ></mat-paginator>
+  </div>
+</section>

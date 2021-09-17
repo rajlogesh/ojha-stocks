@@ -1,0 +1,17 @@
+.sn-is-mobile {
+    .sidenav-container {
+        flex: 1 0 auto;
+        .mat-icon {
+            padding-right: 20px;
+        }
+    }
+}
+.sidenav-container {
+    flex: 1;
+    .mat-nav-list {
+        width: 200px;
+        .mat-icon {
+            padding-right: 20px;
+        }
+    }
+}

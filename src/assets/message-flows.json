@@ -1,0 +1,92 @@
+[
+    {
+      "integrationPlanId": "1",
+      "sources": [
+        {
+          "messageTypeId": "string",
+          "outlet": {
+            "id": "string"
+          },
+          "type": "Source",
+          "id": "string",
+          "name": "string"
+        }
+      ],
+      "sinks": [
+        {
+          "messageTypeId": "string",
+          "inlet": {
+            "id": "string"
+          },
+          "type": "Source",
+          "id": "string",
+          "name": "string"
+        }
+      ],
+      "flows": [
+        {
+          "type": "Source",
+          "id": "string",
+          "name": "string"
+        }
+      ],
+      "connections": [
+        {
+          "outletId": "string",
+          "inletId": "string"
+        }
+      ],
+      "designerLayout": {},
+      "versionNumber": 0,
+      "id": "1",
+      "name": "string",
+      "description": "string",
+      "updatedTime": "2020-03-31T09:53:23.075Z",
+      "updatedBy": "string"
+    },
+    {
+        "integrationPlanId": "1",
+        "sources": [
+          {
+            "messageTypeId": "string",
+            "outlet": {
+              "id": "string"
+            },
+            "type": "Source",
+            "id": "string",
+            "name": "string"
+          }
+        ],
+        "sinks": [
+          {
+            "messageTypeId": "string",
+            "inlet": {
+              "id": "string"
+            },
+            "type": "Source",
+            "id": "string",
+            "name": "string"
+          }
+        ],
+        "flows": [
+          {
+            "type": "Source",
+            "id": "string",
+            "name": "string"
+          }
+        ],
+        "connections": [
+          {
+            "outletId": "string",
+            "inletId": "string"
+          }
+        ],
+        "designerLayout": {},
+        "versionNumber": 0,
+        "id": "1",
+        "name": "string",
+        "description": "string",
+        "updatedTime": "2020-03-31T09:53:23.075Z",
+        "updatedBy": "string"
+      }
+  ]

@@ -1,0 +1,52 @@
+<mat-card class="interdata-search-section">
+    <div class="interdata-toolbar flex">
+        <h3 class="interdata-title">Add Company</h3>
+        <span class="spacer"></span>
+        <a mat-button (click)="location.back()" ><mat-icon>chevron_left</mat-icon>Back</a>
+    </div>
+</mat-card>
+<mat-card *ngIf="userFeedback!=='none'" >
+    <section *ngIf="userFeedback=='loading'" class="text-center" >
+        <mat-spinner [diameter]="25" [strokeWidth]="2" ></mat-spinner>
+    </section>
+    <section *ngIf="userFeedback=='success'" class="text-center" >
+        Successfully added company to ojha stocks.
+    </section>
+    <section *ngIf="userFeedback=='failure'" class="text-center" >
+        Failed to add company details. Please try again or check the errors.
+    </section>
+</mat-card>
+<mat-card class="create-interdata-table" *ngIf="userFeedback=='none'" >
+    <form [formGroup]="createTableForm" (ngSubmit)="createInterdataTable()" >
+        <mat-card-content>
+            <mat-form-field appearance="outline" >
+                <mat-label>Company Name</mat-label>
+                <input matInput name="tableNme" placeholder="company Name" type="text" formControlName="companyName" />
+                <mat-error>Company name is required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" >
+                <mat-label>Company CEO</mat-label>
+                <input matInput name="tableLabel" placeholder="company CEO" type="text" formControlName="companyCEO" />
+                <mat-error>Company CEO details Missing</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" >
+                <mat-label>Company TurnOver</mat-label>
+                <input matInput name="description" placeholder="Company TurnOver" type="text" formControlName="companyTurnover" />
+                <mat-error>Company turn over details missing</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" >
+                <mat-label>Comapany Website</mat-label>
+                <input matInput name="partitionKeyName" placeholder="Comapany Website" type="text" formControlName="companyWebsite" />
+                <mat-error>Company Website is required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" >
+                <mat-label>Stock Exchange</mat-label>
+                <input matInput name="rowKeyName" placeholder="Stock Exchange" type="text" formControlName="stockExchangeList" />
+                <mat-error>Stock exchange details is required</mat-error>
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions class="text-center" >
+            <button mat-raised-button color="primary" class="butn" [disabled]="createTableForm.invalid" >Create</button>
+        </mat-card-actions>
+    </form>
+</mat-card>

@@ -1,0 +1,25 @@
+@media (min-width: 768px) {
+  .activity-section {
+    width: 95%;
+    margin: 20px auto;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .activity-section {
+    width: 90%;
+    margin: 20px auto;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .activity-section {
+    width: 95%;
+    margin: 20px auto;
+  }
+}
+
+.feedback {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

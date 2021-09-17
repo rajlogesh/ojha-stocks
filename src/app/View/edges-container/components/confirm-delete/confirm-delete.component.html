@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Confirm</h1>
+<div mat-dialog-content>
+  <p>Are you sure you want to delete this Edge?</p>
+</div>
+<div mat-dialog-actions class="mat-dialog-actions" >
+  <span class="spacer" ></span>
+  <button mat-raised-button (click)="onNoClick()">No</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Yes</button>
+</div>

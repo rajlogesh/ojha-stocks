@@ -1,0 +1,73 @@
+// toolbar section
+
+.interdata-toolbar {
+  display: flex;
+
+}
+.mat-spinner {
+  margin: 20px auto;
+}
+.interdata-search-section,
+.interdata-content {
+  margin: 20px;
+}
+.interdata-title {
+  margin-top: 15px;
+  margin-right: 20px;
+  text-shadow: 0px 2px 3px #eee;
+}
+
+.mat-row {
+  cursor: pointer;
+}
+.mat-row:hover {
+  background-color: rgb(236, 207, 255);
+}
+
+// table section
+table {
+width: 100%;
+}
+
+th.mat-sort-header-sorted {
+color: black;
+}
+
+:host ::ng-deep .interdata-search-section .mat-form-field-wrapper {
+padding-bottom: 0px;
+}
+
+.interdata-toolbar {
+  button {
+    margin: 10px;
+  }
+}
+
+.table-wrapper{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  overflow-x: auto;
+  .mat-paginator,
+  .mat-table{
+    min-width: 675px;
+  }
+}
+
+
+@media screen and (max-width: 788px) {
+
+  .interdata-toolbar {
+      flex-direction: column;
+      .actions{
+        flex-direction: column;
+        margin: 10px 0px;
+      }
+      .pager{
+        button{
+          width: 50%;
+        }
+      }
+  }
+
+}

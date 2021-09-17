@@ -1,0 +1,24 @@
+.heartbeats,
+.mat-table,
+.full-width {
+  width: 100%;
+}
+
+.mat-headline {
+  padding-top: 10px;
+}
+
+@media screen and (max-width: 567px) {
+  td.mat-cell {
+    overflow-wrap: anywhere;
+  }
+  th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+    padding: 5px
+  }
+  th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type{
+    padding-left: 10px;
+  }
+  th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
+    padding-right: 10px;
+  }
+}

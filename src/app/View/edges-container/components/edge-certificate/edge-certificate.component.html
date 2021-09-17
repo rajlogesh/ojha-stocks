@@ -1,0 +1,75 @@
+<mat-card class="edge-nav">
+  <div class="flex">
+    <h3 class="edge-title" >Upload Certificate</h3>
+    <span class="spacer"></span>
+    <button mat-button [routerLink]="['/edges']" >
+      <mat-icon>chevron_left</mat-icon>
+      Back to Edges
+    </button>
+  </div>
+</mat-card>
+<mat-card class="edge-nav" *ngIf="loading===true" >
+  <mat-spinner [diameter]="50" [strokeWidth]="2" ></mat-spinner>
+</mat-card>
+<ng-container *ngIf="userFeedback=='success' && loading===false" >
+  <ng-container >
+    <mat-card class="edge-nav" >
+      <div class="grid">
+        <div class="tile">
+          <span class="mat-body-strong" >{{ details.thumbprint || '-' }}</span>
+          <h5 class="mat-caption" >Thumbprint</h5>
+        </div>
+        <div class="tile" >
+          <span class="mat-body-strong" >{{ details.serialNumber || '-'  }}</span>
+          <h5 class="mat-caption" >SerialNumber</h5>
+        </div>
+        <div class="tile" >
+          <span class="mat-body-strong" >{{ details.issuer || '-'  }}</span>
+          <h5 class="mat-caption" >Issuer</h5>
+        </div>
+        <div class="tile" >
+          <span class="mat-body-strong" >{{ details.subject || '-'  }}</span>
+          <h5 class="mat-caption" >Subject</h5>
+        </div>
+        <div class="tile"  >
+          <span class="mat-body-strong" >{{ details.friendlyName || '-'  }}</span>
+          <h5 class="mat-caption" >Friendly Name</h5>
+        </div>
+        <div class="tile" >
+          <span class="mat-body-strong" >{{ details.expirationDate || '-'  }}</span>
+          <h5 class="mat-caption" >Expiration Date</h5>
+        </div>
+      </div>
+    </mat-card>
+  </ng-container>
+</ng-container>
+<ng-container *ngIf="userFeedback=='failure'" >
+  <mat-card class="create-edge-container" >
+    Sorry! failed to upload certificate.
+  </mat-card>
+</ng-container>
+<ng-container *ngIf="userFeedback=='none' && loading===false" >
+  <form [formGroup]="upload_certificate_form" (ngSubmit)="uploadCertificate()" >
+    <mat-card class="create-edge-container" >
+      <mat-card-content>
+        <mat-form-field appearance="outline" >
+          <mat-label>Passphrase</mat-label>
+          <input type="text"  placeholder="Certificate passphrase" matInput formControlName="certPass" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Certificate Data</mat-label>
+            <textarea matInput  placeholder="Certificate Content" formControlName="certData"></textarea>
+        </mat-form-field>
+      </mat-card-content>
+      <span class="upload-ceritificate">
+          <input hidden type="file" accept="application/pkcs12" #uploadFile (change) = "onUploadFile($event.target.files)"/>
+          <button mat-stroked-button type="button" color="primary" (click)="uploadFile.click()">
+             Upload Certificate
+          </button>
+        </span>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" [disabled]="upload_certificate_form.invalid" >Save</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</ng-container>

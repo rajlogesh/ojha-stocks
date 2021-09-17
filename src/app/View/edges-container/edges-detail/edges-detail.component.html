@@ -1,0 +1,14 @@
+<mat-tab-group (selectedIndexChange)="setTabValue($event)" [selectedIndex]="getTabValue()">
+  <mat-tab label="Edge Detail" >
+    <app-edges-update
+      [edge$]="edge$"
+      (edgeRequest)="parseEdgeRequest($event)"
+    ></app-edges-update>
+  </mat-tab>
+  <mat-tab label="Edge Services" >
+    <app-edge-services
+      [service$]="service$"
+      (serviceRequest)="parseServiceRequest($event)"
+    ></app-edge-services>
+  </mat-tab>
+</mat-tab-group>

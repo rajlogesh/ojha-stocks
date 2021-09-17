@@ -1,0 +1,8 @@
+{
+    "integrationPlanType": "NotSet",
+    "id": "1",
+    "name": "VOXP Device Data to Kafka",
+    "description": "Receives VOXP device data and sends to Kafka",
+    "updatedTime": "2020-03-29T18:01:22.911Z",
+    "updatedBy": "string"
+}

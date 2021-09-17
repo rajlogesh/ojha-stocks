@@ -1,0 +1,48 @@
+<mat-toolbar color="primary" class="app-toolbar" >
+    <mat-toolbar-row class="first-row mat-elevation-z8" >
+        <ng-container *ngIf="!menuIconState" >
+            <button mat-icon-button (click)="toggleSidebar()" >
+                <mat-icon>menu</mat-icon>
+            </button>
+        </ng-container>
+        <ng-container *ngIf="menuIconState" >
+            <button mat-icon-button (click)="toggleSidebar()" >
+                <mat-icon>menu_open</mat-icon>
+            </button>
+        </ng-container>
+        <div class="title" [routerLink]="['/']" >
+            <img src="assets/app-logo.png" />
+        </div>
+        <div class="spacer"></div>
+        <div class="search">
+            <button mat-icon-button aria-label="Search" (click)="openDialog()" >
+                <mat-icon>search</mat-icon>
+            </button>
+            <button mat-icon-button aria-label="Profile" [matMenuTriggerFor]="profileMenu" >
+                <mat-icon>account_circle</mat-icon>
+            </button>
+            <mat-menu #profileMenu="matMenu" xPosition="before" >
+                <button mat-menu-item >
+                    <mat-icon>person</mat-icon>
+                    <span>{{ userDetails['firstName'] || 'Demo User'}}</span>
+                </button>
+                <mat-divider></mat-divider>
+                <button mat-menu-item [routerLink]="['/settings']" >
+                    <mat-icon>settings</mat-icon>
+                    <span>Settings</span>
+                </button>
+                <button mat-menu-item (click)="doLogout()" >
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>Logout</span>
+                </button>
+            </mat-menu>
+        </div>
+    </mat-toolbar-row>
+    <ng-container *ngIf="showTitleBar" >
+        <mat-toolbar-row class="second-row">
+            <div>
+                <span class="f-open-sans">{{pageTitle}}</span>
+            </div>
+        </mat-toolbar-row>
+    </ng-container>
+</mat-toolbar>
