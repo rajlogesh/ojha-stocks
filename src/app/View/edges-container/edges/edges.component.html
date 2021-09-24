@@ -3,9 +3,9 @@
   <section class="navigation flex" >
     <span class="spacer" ></span>
     <div class="actions flex">
-      <button mat-raised-button color="primary" (click)="navigateSecure()"
-         ><mat-icon>lock</mat-icon></button>
       <button mat-raised-button color="primary"
+        [routerLink]="['/interdata','tables']" >All Companies</button>
+      <button mat-raised-button color="primary" [disabled]='true'
         [routerLink]="['/edges','create']" >Create New</button>
       <div class="pager flex">
         <button mat-button color="primary" [disabled]="!ppAvailable"

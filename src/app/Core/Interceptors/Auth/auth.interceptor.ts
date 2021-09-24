@@ -36,6 +36,10 @@ export class AuthInterceptor implements HttpInterceptor {
     else{
       headers['ContentType'] = 'application/json';
       headers['Content-Type'] = 'application/json';
+      headers['Access-Control-Allow-Credentials'] = 'true';
+      headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS, DELETE';
+      headers['Access-Control-Max-Age'] = '3600';
+      headers['Access-Control-Allow-Headers'] = 'ContentType, Content-Type, Accept, X-Requested-With, remember-me';
     }
 
     const requestHeaders = this.getRequestHeaders(request);
@@ -55,6 +59,9 @@ export class AuthInterceptor implements HttpInterceptor {
     let requestHeaders = {};
     headerKeys.forEach((_key) => {
       requestHeaders[_key] = request.headers.get(_key);
+      if(_key == 'Origin') {
+        requestHeaders['Access-Control-Allow-Origin'] = request.headers.get(_key);
+      }
     });
     return requestHeaders;
   }

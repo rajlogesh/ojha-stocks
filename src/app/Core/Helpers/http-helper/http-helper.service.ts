@@ -21,7 +21,7 @@ export class HttpHelperService {
   }
 
   apiUrl(path: string) {
-    if (!environment.production) {
+    if (!environment.production || environment.production) {
       const protocol = environment.apiProtocol;
       const domain = environment.apiUrl;
       return protocol + '://' + domain + path;

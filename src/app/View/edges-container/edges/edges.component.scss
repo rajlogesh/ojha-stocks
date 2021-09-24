@@ -1,6 +1,15 @@
 .mat-spinner {
   margin: 20px auto;
 }
+.interdata-toolbar {
+  display: flex;
+
+}
+.interdata-toolbar {
+  button {
+    margin: 10px;
+  }
+}
 .edges-container {
   margin: 20px;
   .mat-form-field {
@@ -40,6 +49,23 @@
       flex-direction: column;
       .actions{
         flex-direction: column;
+      }
+      .pager{
+        button{
+          width: 50%;
+        }
+      }
+  }
+
+}
+
+@media screen and (max-width: 816px) {
+
+  .interdata-toolbar {
+      flex-direction: column;
+      .actions{
+        flex-direction: column;
+        margin: 10px 0px;
       }
       .pager{
         button{

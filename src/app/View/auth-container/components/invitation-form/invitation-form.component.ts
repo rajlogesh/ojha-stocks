@@ -24,12 +24,9 @@ export class InvitationFormComponent implements OnInit {
 
   registerInvitationFormControl() {
     this.invitation_form = this.fb.group({
-      email: ['', [
+      mfaCode: ['', [
         Validators.required,
-        Validators.email
-      ]],
-      invitationCode: ['', [
-        Validators.required
+        Validators.minLength(8)
       ]]
     });
   }
@@ -40,8 +37,7 @@ export class InvitationFormComponent implements OnInit {
 
   invitationSignIn() {
     const payload = {
-      'email': this.invitation_form.value.email,
-      'invitationCode': this.invitation_form.value.invitationCode
+      'mfaCode': this.invitation_form.value.mfaCode
     };
     this.invitationEvent.emit(payload);
   }

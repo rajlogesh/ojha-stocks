@@ -16,7 +16,7 @@
       ></app-change-password>
     </ng-template>
   </mat-tab>
-  <mat-tab label="Change Logo">
+  <mat-tab label="Change photo">
     <ng-template matTabContent >
       <app-change-logo
         [logo$]="logo$"
@@ -24,15 +24,6 @@
         [logoPutStatus$]="logoPutStatus$"
         (uploadLogo$)="uploadLogo($event)"
       ></app-change-logo>
-    </ng-template>
-  </mat-tab>
-  <mat-tab label="API Key" >
-    <ng-template matTabContent >
-      <app-api-key
-        [APIKey$]="APIKey$"
-        [APIKeyStatus$]="APIKeyStatus$"
-        (refreshAPIKey)="refreshAPIKey($event)"
-      ></app-api-key>
     </ng-template>
   </mat-tab>
 </mat-tab-group>

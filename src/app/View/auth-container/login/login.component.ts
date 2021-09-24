@@ -31,32 +31,52 @@ export class LoginComponent implements OnInit {
   normalSignIn(payload) {
     
    this.loading = true;
-   this.authFacade.login(payload['userId'], payload['password']) 
-   .then(data => {
-   this.loading = false;
-        this.authFacade.loginRedirect();
-     })
-     .catch(error => {
+   setTimeout(() => {
+     console.log("checking the login data");
      this.loading = false;
-         this.loginError = true;
-         setTimeout(() => { this.loginError = false; }, environment.errorMsgDly);
-       });
+   this.is_invited = !this.is_invited;
+   }, 1000);
+   
+  //  this.authFacade.login(payload['userId'], payload['password']) 
+  //  .then(data => {
+  //  this.loading = false;
+  //       this.authFacade.loginRedirect();
+  //    })
+  //    .catch(error => {
+  //    this.loading = false;
+  //        this.loginError = true;
+  //        setTimeout(() => { this.loginError = false; }, environment.errorMsgDly);
+  //      });
   }
 
   invitationSignIn(payload) {
     this.loading = true;
-    this.authFacade
-      .validateInvitation(payload['email'], payload['invitationCode'])
-      .then((response) => {
+    setTimeout(() => {
+      console.log("checking the login data");
+      this.authFacade.login('lvenkat', 'Lrv@899180') 
+      .then(data => {
+      this.loading = false;
+           this.authFacade.loginRedirect();
+        })
+        .catch(error => {
         this.loading = false;
-        this.invitee = response;
-        this.confirmInvitee = true;
-      })
-      .catch((error) => {
-        this.loading = false;
-        this.invitationError = true;
-        setTimeout(() => { this.invitationError = false; }, environment.errorMsgDly);
-      });
+            this.loginError = true;
+            setTimeout(() => { this.loginError = false; }, environment.errorMsgDly);
+          });
+    }, 10000);
+    
+    // this.authFacade
+    //   .validateInvitation(payload['email'], payload['invitationCode'])
+    //   .then((response) => {
+    //     this.loading = false;
+    //     this.invitee = response;
+    //     this.confirmInvitee = true;
+    //   })
+    //   .catch((error) => {
+    //     this.loading = false;
+    //     this.invitationError = true;
+    //     setTimeout(() => { this.invitationError = false; }, environment.errorMsgDly);
+    //   });
   }
 
   RALInvitee(payoad) {

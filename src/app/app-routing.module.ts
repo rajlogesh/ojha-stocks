@@ -16,26 +16,26 @@ const routes: Routes = [
       },
       {
         path: 'activity',
-        // canActivateChild: [AdminGuard],
+        canActivateChild: [AdminGuard],
         data: { pageTitle: 'Activity' },
         loadChildren: () => import('./View/activity-container/activity-container.module').then(m => m.ActivityContainerModule)
       },
       {
         path: 'interdata',
-        // canActivateChild: [AdminGuard],
+        canActivateChild: [AdminGuard],
         data: {pageTitle: 'Interdata' },
         loadChildren: () => import('./View/interdata-container/interdata-container.module').then(m=>m.InterdataContainerModule)
       },
       {
         path: 'edges',
-        // canActivateChild: [AdminGuard],
+        canActivateChild: [AdminGuard],
         data: { pageTitle: 'Edges' },
         loadChildren: () => import('./View/edges-container/edges-container.module')
           .then(m => m.EdgesContainerModule)
       },
       {
         path: 'settings',
-        //canActivateChild: [AdminGuard],
+        canActivateChild: [AdminGuard],
         data: { pageTitle: 'Settings' },
         loadChildren: () => import('./View/settings-container/settings-container.module').then(m => m.SettingsContainerModule)
       }

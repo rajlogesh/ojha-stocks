@@ -30,8 +30,8 @@
         </ng-container>
       </mat-card-content>
       <mat-card-actions>
-        <a  *ngIf="!is_invited && !loading"  (click)="toggleInvitation()" >Signing with invitation code?</a>        
-        <a  *ngIf="is_invited && !loading"  (click)="toggleInvitation()" >Want to sign in with a password?</a>
+        <a  *ngIf="!is_invited && !loading"  (click)="toggleInvitation()" >sign up</a>        
+        <a  *ngIf="is_invited && !loading"  (click)="toggleInvitation()" >Cancel</a>
       </mat-card-actions>
     </mat-card>
   </div>

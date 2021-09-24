@@ -22,15 +22,19 @@ export class AuthBusinessService {
   ) { }
 
   login(username: string, password: string) {
+    
+
     return new Promise((resolve, reject) => {
-      this.loginService.login(username, password)
-      .subscribe((response) => {
-      	console.log(response);
-        //localStorage.setItem('apiToken', response.headers.get('X-SESSION-TOKEN'));
-        resolve(true);
-      }, (error) => {
-        reject(error);
-      });
+      localStorage.setItem('apiToken', 'hjjfskjdflajiibcijilzjsd');
+      resolve(true);
+      // this.loginService.login(username, password)
+      // .subscribe((response) => {
+      // 	console.log(response);
+      //   //localStorage.setItem('apiToken', response.headers.get('X-SESSION-TOKEN'));
+      //   resolve(true);
+      // }, (error) => {
+      //   reject(error);
+      // });
     });
   }
 
@@ -48,24 +52,25 @@ export class AuthBusinessService {
     if (!token) {
       return false;
     } else {
-      const decodedToken = jwt_decode(token);
-      // Time in milliseconds.
-      const issuedTime = parseInt(decodedToken.iat, 10) * 1000;
-      const expirationTime = parseInt(decodedToken.exp, 10) * 1000;
-      const currentTime = Date.now();
+      // const decodedToken = jwt_decode(token);
+      // // Time in milliseconds.
+      // const issuedTime = parseInt(decodedToken.iat, 10) * 1000;
+      // const expirationTime = parseInt(decodedToken.exp, 10) * 1000;
+      // const currentTime = Date.now();
 
-      // Renew token if more than six hours elapsed since issued time.
-      if (currentTime - issuedTime > 21600000) {
-          this.renewAccessToken()
-            .then(response => {
-              return response;
-            })
-            .catch(response => {
-              return response;
-            });
-      }
+      // // Renew token if more than six hours elapsed since issued time.
+      // if (currentTime - issuedTime > 21600000) {
+      //     this.renewAccessToken()
+      //       .then(response => {
+      //         return response;
+      //       })
+      //       .catch(response => {
+      //         return response;
+      //       });
+      // }
 
-      return (currentTime < expirationTime);
+      // return (currentTime < expirationTime);
+      return true;
     }
   }
 

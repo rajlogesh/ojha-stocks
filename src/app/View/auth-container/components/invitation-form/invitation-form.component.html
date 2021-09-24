@@ -1,17 +1,11 @@
 <form [formGroup]="invitation_form" (ngSubmit)="invitationSignIn()" >
-  <mat-form-field appearance="outline" >
-    <mat-label>Email address</mat-label>
-    <input matInput placeholder="Email address" name="login-email" formControlName="email" />
-    <mat-error *ngIf="invitationFormControls.email.errors?.required" >Email is required</mat-error>
-    <mat-error *ngIf="invitationFormControls.email.errors?.email" >Enter the correct email format</mat-error>
-  </mat-form-field>
   <mat-form-field appearance="outline"  >
-    <mat-label>Invitation Code</mat-label>
-    <input matInput placeholder="Enter Invitation Code" name="invitation-code" formControlName="invitationCode" />
-    <mat-error *ngIf="invitationFormControls.invitationCode.errors?.required" >Invitation code is required</mat-error>
+    <mat-label>MFA Code</mat-label>
+    <input matInput type="password" placeholder="MFA Code" name="invitation-code" formControlName="mfaCode" />
+    <mat-error *ngIf="invitationFormControls.mfaCode.errors?.required" >Invitation code is required</mat-error>
   </mat-form-field>
   <button type="submit" mat-raised-button color="primary" [disabled]="!invitation_form.valid" >Login</button>
   <mat-error *ngIf="invitationError">
-    Email or Invitation Code incorrect. Please check your credentials.
+    MFA token given is invalid
   </mat-error>
 </form>
